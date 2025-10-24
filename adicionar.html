@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Adicionar</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-adicionar">
+        <div class="assistente-container adicionar">
+            
+            <div class="etapa ativa" data-etapa="1">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Qual o nome do remédio?</h2>
+                    <p class="etapa-texto">(O nome que está na caixa)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputNomeRemedio" class="etiqueta-assistente">Nome do Medicamento</label>
+                        <input type="text" class="input-assistente" id="inputNomeRemedio" placeholder="Ex: Dipirona">
+                        <button class="btn-voz" data-para="inputNomeRemedio">🎤</button>
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="2">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Como você chama esse remédio?</h2>
+                    <p class="etapa-texto">(Um apelido fácil de lembrar)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputApelidoRemedio" class="etiqueta-assistente">Apelido</label>
+                        <input type="text" class="input-assistente" id="inputApelidoRemedio" placeholder="Ex: Remédio da dor">
+                        <button class="btn-voz" data-para="inputApelidoRemedio">🎤</button>
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="3">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Qual é a dose?</h2>
+                    <p class="etapa-texto">(Quantos comprimidos, gotas, etc.)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputDose" class="etiqueta-assistente">Dose</label>
+                        <input type="text" class="input-assistente" id="inputDose" placeholder="Ex: 1 comprimido">
+                        <button class="btn-voz" data-para="inputDose">🎤</button>
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+            
+            <div class="etapa" data-etapa="4">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Qual o primeiro horário que você vai tomar?</h2>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputPrimeiroHorario" class="etiqueta-assistente">Primeiro Horário</label>
+                        <input type="time" class="input-assistente" id="inputPrimeiroHorario">
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="5">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">De quanto em quanto tempo?</h2>
+                    <div class="opcoes-intervalo assistente">
+                        <button class="btn-opcao-intervalo" data-intervalo="4">De 4 em 4 horas</button>
+                        <button class="btn-opcao-intervalo" data-intervalo="6">De 6 em 6 horas</button>
+                        <button class="btn-opcao-intervalo" data-intervalo="8">De 8 em 8 horas</button>
+                        <button class="btn-opcao-intervalo" data-intervalo="12">De 12 em 12 horas</button>
+                        <button class="btn-opcao-intervalo" data-intervalo="24">1 vez ao dia</button>
+                    </div>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="6">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Por quantos dias?</h2>
+                    <p class="etapa-texto">(Deixe em branco se for de uso contínuo)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputDuracao" class="etiqueta-assistente">Duração (em dias)</label>
+                        <input type="number" class="input-assistente" id="inputDuracao" placeholder="Ex: 7">
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="7">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Quer tirar uma foto do remédio?</h2>
+                    <p class="etapa-texto">Isso ajuda a identificar o remédio certo.</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputFoto" class="etiqueta-assistente btn-principal">Tirar Foto / Escolher</label>
+                        <input type="file" id="inputFoto" accept="image/*" capture="environment" class="input-foto">
+                        <img id="previewFoto" class="preview-foto" alt="Pré-visualização da foto">
+                    </div>
+                    <button class="btn-principal" id="btnSalvarRemedio">Salvar Medicamento</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="8">
+                <div class="conteudo-etapa">
+                    <div class="etapa-icone">🎉</div>
+                    <h2 class="etapa-titulo">Medicamento salvo!</h2>
+                    <p class="etapa-texto">Você será redirecionado para a tela inicial.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>

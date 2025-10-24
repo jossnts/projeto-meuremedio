@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Configurações</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-configuracoes">
+        <header>
+            <div class="logo">
+                <span class="logo-icone">💊</span>
+                <h1><span class="texto-titulo-pagina">Configurações</span></h1>
+            </div>
+            <div class="acessibilidade-header">
+                <button class="btn-acessibilidade" aria-label="Abrir painel de acessibilidade">♿</button>
+                <button class="btn-acessibilidade" id="btnLerPagina" aria-label="Escutar todo o conteúdo da página em voz alta">🔊</button>
+            </div>
+        </header>
+
+        <div class="formulario-container">
+            <h2><span class="texto-titulo-form">⚙️ Configurações do App</span></h2>
+            
+            <div class="grupo-formulario">
+                <label for="inputNomeConfig">Seu Nome</label>
+                <input type="text" id="inputNomeConfig" class="input-formulario" placeholder="Seu nome">
+                <button class="btn-voz" data-para="inputNomeConfig">🎤</button>
+            </div>
+            
+            <div class="grupo-formulario">
+                <label for="btnLimparDados">Limpar Todos os Dados</label>
+                <button class="btn-principal perigo" id="btnLimparDados">Limpar Tudo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>

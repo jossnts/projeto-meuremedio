@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Início</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-home">
+        <header aria-label="Meu Remédio, Botão de cadeira de rodas, Botão de alto falante">
+            <div class="logo">
+                <span class="logo-icone">💊</span>
+                <h1><span class="texto-titulo-pagina">MeuRemédio</span></h1>
+            </div>
+            <div class="acessibilidade-header">
+                <button class="btn-acessibilidade" aria-label="Abrir painel de acessibilidade">♿</button>
+                <button class="btn-acessibilidade" id="btnLerPagina" aria-label="Escutar todo o conteúdo da página em voz alta">🔊</button>
+            </div>
+        </header>
+
+        <div class="mensagem-boasvindas">
+            <div class="saudacao-usuario" id="saudacaoUsuario">Olá, [Nome]!</div>
+            <div class="hora-atual" id="horaAtual">--:--</div>
+        </div>
+
+        <div class="proximo-medicamento">
+            <h2><span class="texto-proximo-remedio">⏰ Próximo Medicamento</span></h2>
+            <div id="infoProximoMedicamento">
+                <p>Nenhum medicamento agendado para agora.</p>
+            </div>
+        </div>
+
+        <div class="lista-medicamentos" id="listaMedicamentosHome">
+            <!-- Os medicamentos são inseridos aqui pelo JavaScript -->
+        </div>
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>

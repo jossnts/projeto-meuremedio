@@ -1,0 +1,1355 @@
+/* ===================================
+   MEUREMÉDIO - DESIGN PREMIUM 2025
+   Inspirado em apps bancários modernos
+   =================================== */
+
+/* --- VARIÁVEIS GLOBAIS (Modo Claro - Estilo Banking) --- */
+:root {
+    /* Cores Principais - Banking Style */
+    --cor-primaria: #1E40AF;           /* Azul Royal Forte */
+    --cor-primaria-escura: #1E3A8A;
+    --cor-primaria-clara: #3B82F6;
+    --cor-secundaria: #10B981;         /* Verde Esmeralda */
+    --cor-secundaria-hover: #059669;
+    --cor-acento: #6366F1;             /* Índigo moderno */
+    --cor-perigo: #EF4444;
+    --cor-perigo-hover: #DC2626;
+    --cor-aviso: #F59E0B;
+    --cor-sucesso: #10B981;
+    
+    /* Cores Neutras - Clean & Professional */
+    --cor-fundo: #F8FAFC;              /* Cinza gelo */
+    --cor-fundo-card: #FFFFFF;
+    --cor-texto-principal: #1E293B;
+    --cor-texto-secundario: #64748B;
+    --cor-borda: #E2E8F0;
+    --cor-overlay: rgba(30, 64, 175, 0.05);
+    
+    /* Sombras Profissionais */
+    --sombra-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(30, 64, 175, 0.08);
+    --sombra-card-hover: 0 4px 16px rgba(30, 64, 175, 0.12), 0 8px 32px rgba(30, 64, 175, 0.08);
+    --sombra-botao: 0 4px 14px rgba(30, 64, 175, 0.3);
+    --raio-borda: 16px;
+    --raio-botao: 12px;
+    
+    /* Transições */
+    --transicao-rapida: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-media: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-lenta: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Espaçamentos */
+    --espacamento-xs: 8px;
+    --espacamento-sm: 12px;
+    --espacamento-md: 20px;
+    --espacamento-lg: 32px;
+    --espacamento-xl: 48px;
+}
+
+/* --- MODO ESCURO (Dark Banking Premium) --- */
+.modo-escuro {
+    --cor-primaria: #3B82F6;           /* Azul Neon */
+    --cor-primaria-escura: #2563EB;
+    --cor-primaria-clara: #60A5FA;
+    --cor-secundaria: #34D399;
+    --cor-secundaria-hover: #10B981;
+    --cor-acento: #818CF8;
+    --cor-perigo: #F87171;
+    --cor-perigo-hover: #EF4444;
+    --cor-aviso: #FBBF24;
+    --cor-sucesso: #34D399;
+    
+    --cor-fundo: #0F172A;              /* Azul escuro profundo */
+    --cor-fundo-card: #1E293B;         /* Card escuro */
+    --cor-texto-principal: #F1F5F9;
+    --cor-texto-secundario: #94A3B8;
+    --cor-borda: #334155;
+    --cor-overlay: rgba(59, 130, 246, 0.1);
+    
+    --sombra-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+    --sombra-card-hover: 0 4px 16px rgba(59, 130, 246, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3);
+    --sombra-botao: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+/* --- ALTO CONTRASTE --- */
+.alto-contraste {
+    --cor-primaria: #0066FF;
+    --cor-primaria-escura: #0052CC;
+    --cor-primaria-clara: #3399FF;
+    --cor-secundaria: #00FF00;
+    --cor-secundaria-hover: #00CC00;
+    --cor-acento: #AA00FF;
+    --cor-perigo: #FF0000;
+    --cor-perigo-hover: #CC0000;
+    --cor-aviso: #FFFF00;
+    --cor-sucesso: #00FF00;
+    
+    --cor-fundo: #000000;
+    --cor-fundo-card: #000000;
+    --cor-texto-principal: #FFFFFF;
+    --cor-texto-secundario: #FFFF00;
+    --cor-borda: #FFFFFF;
+    
+    --sombra-card: 0 0 0 3px #FFFFFF;
+    --sombra-card-hover: 0 0 0 4px #FFFF00;
+    --sombra-botao: 0 0 0 3px #FFFFFF;
+}
+
+.alto-contraste * {
+    border-width: 3px !important;
+}
+
+/* --- RESET E PADRÕES GLOBAIS --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-size: 18px;
+    line-height: 1.6;
+    
+    /* Layout mobile-first */
+    max-width: 428px;
+    min-height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    
+    /* Suavização */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    transition: background-color var(--transicao-media), color var(--transicao-media);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (min-width: 429px) and (max-width: 768px) {
+    body {
+        max-width: 100%;
+        padding: 0 var(--espacamento-md);
+    }
+}
+
+@media (min-width: 769px) {
+    body {
+        max-width: 480px;
+    }
+}
+
+/* --- LAYOUT DA PÁGINA --- */
+.pagina {
+    padding: 0;
+    padding-bottom: 90px;
+    min-height: 100vh;
+    animation: fadeIn var(--transicao-media);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pagina.ativa {
+    display: block;
+}
+
+/* --- HEADER MODERNO (Banking Style) --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--espacamento-lg) var(--espacamento-md);
+    background: var(--cor-primaria);
+    color: white;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modo-escuro header {
+    background: var(--cor-fundo-card);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-sm);
+}
+
+.logo-icone {
+    font-size: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.logo h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* --- BOTÕES DE ACESSIBILIDADE (HEADER) --- */
+.acessibilidade-header {
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-sm);
+}
+
+.btn-acessibilidade {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transicao-rapida);
+}
+
+.modo-escuro .btn-acessibilidade {
+    background: var(--cor-primaria);
+    border-color: var(--cor-primaria-clara);
+}
+
+.btn-acessibilidade:hover,
+.btn-acessibilidade:focus {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.btn-acessibilidade:active {
+    transform: scale(0.95);
+}
+
+/* --- MENSAGEM BEM-VINDO --- */
+.mensagem-boasvindas {
+    text-align: center;
+    margin: var(--espacamento-lg) var(--espacamento-md);
+    padding: var(--espacamento-xl) var(--espacamento-lg);
+    background: var(--cor-fundo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-borda);
+}
+
+.saudacao-usuario {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin-bottom: var(--espacamento-md);
+}
+
+.hora-atual {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- PRÓXIMO MEDICAMENTO --- */
+.proximo-medicamento {
+    background: var(--cor-primaria);
+    border-radius: var(--raio-borda);
+    padding: var(--espacamento-lg) var(--espacamento-md);
+    margin: 0 var(--espacamento-md) var(--espacamento-lg);
+    color: white;
+    box-shadow: var(--sombra-card);
+}
+
+.modo-escuro .proximo-medicamento {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-acento));
+}
+
+.proximo-medicamento h2 {
+    font-size: 1.2rem;
+    margin-bottom: var(--espacamento-md);
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-sm);
+    font-weight: 600;
+}
+
+#infoProximoMedicamento p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+/* --- LISTA DE MEDICAMENTOS --- */
+.lista-medicamentos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-md);
+    padding: 0 var(--espacamento-md);
+}
+
+.cartao-medicamento {
+    background: var(--cor-fundo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    padding: var(--espacamento-md);
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-md);
+    transition: all var(--transicao-rapida);
+    border: 1px solid var(--cor-borda);
+    position: relative;
+}
+
+.cartao-medicamento:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.cartao-medicamento::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--cor-primaria);
+    border-radius: var(--raio-borda) 0 0 var(--raio-borda);
+}
+
+.imagem-medicamento {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    background: var(--cor-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
+    overflow: hidden;
+}
+
+.modo-escuro .imagem-medicamento {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-acento));
+}
+
+.imagem-medicamento img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-medicamento {
+    flex: 1;
+    min-width: 0;
+}
+
+.nome-medicamento {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--cor-texto-principal);
+    margin-bottom: 4px;
+    white-space: nowrap;      /* Impede a quebra de linha */
+    overflow: hidden;         /* Esconde o que transbordar */
+    text-overflow: ellipsis;  /* Adiciona "..." no final */
+}
+
+.detalhes-medicamento {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacamento-sm);
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+.horario-medicamento {
+    font-weight: 600;
+    color: var(--cor-primaria);
+}
+
+.dose-medicamento {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- BOTÕES DE AÇÃO --- */
+.botoes-acao {
+    display: flex;
+    gap: var(--espacamento-xs);
+    flex-shrink: 0;
+}
+
+.btn-acao {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transicao-rapida);
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-tomar {
+    background: var(--cor-secundaria);
+    color: white;
+}
+
+.btn-tomar:hover {
+    background: var(--cor-secundaria-hover);
+    transform: scale(1.05);
+}
+
+.btn-pular, .btn-deletar {
+    background: var(--cor-perigo);
+    color: white;
+}
+
+.btn-pular:hover, .btn-deletar:hover {
+    background: var(--cor-perigo-hover);
+    transform: scale(1.05);
+}
+
+.btn-acao:active {
+    transform: scale(0.95);
+}
+
+/* --- BOTÕES PRINCIPAIS --- */
+.btn-principal {
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: var(--raio-botao);
+    padding: var(--espacamento-md) var(--espacamento-lg);
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: var(--espacamento-md);
+    box-shadow: var(--sombra-botao);
+    transition: all var(--transicao-rapida);
+}
+
+.btn-principal:hover {
+    background: var(--cor-primaria-escura);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+}
+
+.btn-principal:active {
+    transform: translateY(0);
+}
+
+.btn-principal.perigo {
+    background: var(--cor-perigo);
+}
+
+.btn-principal.perigo:hover {
+    background: var(--cor-perigo-hover);
+}
+
+.btn-secundario {
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+    border-radius: var(--raio-botao);
+    padding: var(--espacamento-sm) var(--espacamento-lg);
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: var(--espacamento-sm);
+    transition: all var(--transicao-rapida);
+}
+
+.btn-secundario:hover {
+    background: var(--cor-overlay);
+    border-color: var(--cor-primaria-escura);
+}
+
+.alto-contraste .btn-secundario {
+    border-color: var(--cor-texto-principal);
+    color: var(--cor-texto-principal);
+}
+
+/* --- PAINEL DE ACESSIBILIDADE --- */
+.painel-acessibilidade {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(360px, 90vw);
+    height: 100vh;
+    background: var(--cor-fundo-card);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+    padding: var(--espacamento-lg);
+    z-index: 2000;
+    transition: right var(--transicao-media);
+    overflow-y: auto;
+    border-left: 1px solid var(--cor-borda);
+}
+
+.painel-acessibilidade.aberto {
+    right: 0;
+}
+
+.painel-acessibilidade h2 {
+    font-size: 1.5rem;
+    color: var(--cor-primaria);
+    margin-bottom: var(--espacamento-lg);
+    padding-bottom: var(--espacamento-md);
+    border-bottom: 2px solid var(--cor-borda);
+    font-weight: 700;
+}
+
+.opcao-acessibilidade {
+    margin-bottom: var(--espacamento-md);
+    padding: var(--espacamento-md);
+    background: var(--cor-fundo);
+    border-radius: var(--raio-botao);
+    border: 1px solid var(--cor-borda);
+    transition: all var(--transicao-rapida);
+}
+
+.opcao-acessibilidade:hover {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
+}
+
+.opcao-acessibilidade label {
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-md);
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.opcao-acessibilidade input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: var(--cor-primaria);
+}
+
+.grupo-botoes-fonte {
+    display: flex;
+    gap: var(--espacamento-sm);
+    margin-top: var(--espacamento-sm);
+}
+
+.grupo-botoes-fonte .btn-acao {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 700;
+    background: var(--cor-primaria);
+    color: white;
+}
+
+/* --- ASSISTENTE (WIZARD) --- */
+.assistente-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: var(--espacamento-lg);
+    justify-content: center;
+    animation: fadeIn var(--transicao-lenta);
+}
+
+.assistente-container.adicionar {
+    min-height: auto;
+    padding: var(--espacamento-md);
+    padding-bottom: 100px;
+}
+
+.etapa {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.etapa.ativa {
+    display: flex;
+    animation: slideUp var(--transicao-media);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.conteudo-etapa {
+    width: 100%;
+    max-width: 400px;
+}
+
+.etapa-icone {
+    font-size: 5rem;
+    margin-bottom: var(--espacamento-lg);
+}
+
+.etapa-titulo {
+    font-size: 1.8rem;
+    color: var(--cor-primaria);
+    font-weight: 800;
+    margin-bottom: var(--espacamento-md);
+    line-height: 1.3;
+}
+
+.etapa-texto {
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: var(--espacamento-lg);
+    line-height: 1.5;
+}
+
+.grupo-formulario.assistente {
+    text-align: left;
+    margin-bottom: var(--espacamento-lg);
+    position: relative;
+}
+
+.etiqueta-assistente {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin-bottom: var(--espacamento-sm);
+    display: block;
+}
+
+.input-assistente {
+    width: 100%;
+    padding: var(--espacamento-md);
+    padding-right: 60px;
+    font-size: 1.2rem;
+    border-radius: var(--raio-botao);
+    border: 2px solid var(--cor-borda);
+    background: var(--cor-fundo-card);
+    color: var(--cor-texto-principal);
+    transition: all var(--transicao-rapida);
+    font-weight: 600;
+}
+
+.input-assistente:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 4px var(--cor-overlay);
+}
+
+.btn-voz {
+    position: absolute;
+    right: var(--espacamento-xs);
+    top: 42px;
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transicao-rapida);
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.3);
+}
+
+.btn-voz:hover {
+    transform: scale(1.08);
+    background: var(--cor-primaria-escura);
+}
+
+.opcoes-intervalo.assistente {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-sm);
+}
+
+.btn-opcao-intervalo {
+    padding: var(--espacamento-md);
+    border: 2px solid var(--cor-borda);
+    border-radius: var(--raio-botao);
+    background: var(--cor-fundo-card);
+    color: var(--cor-texto-principal);
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+}
+
+.btn-opcao-intervalo:hover {
+    border-color: var(--cor-primaria);
+    background: var(--cor-overlay);
+}
+
+.btn-opcao-intervalo.ativo {
+    background: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+.input-foto {
+    display: none;
+}
+
+.preview-foto {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: var(--espacamento-md) auto;
+    border: 4px solid var(--cor-primaria);
+    box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
+    display: none;
+}
+
+.preview-foto.visivel {
+    display: block;
+    animation: zoomIn var(--transicao-media);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- NAVEGAÇÃO INFERIOR --- */
+.nav-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(650px, 100%);
+    border-radius: 5px;
+    background: var(--cor-fundo-card);
+    display: flex;
+    justify-content: space-around; /* <-- VOLTOU AO NORMAL */
+    padding: var(--espacamento-sm) 0;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    z-index: 100;
+    border-top: 1px solid var(--cor-borda);
+    overflow: hidden; /* Garante que nada transborde */
+}
+
+.btn-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    font-size: 0.85rem;
+    gap: 4px;
+    text-decoration: none;
+    padding: var(--espacamento-xs);
+    flex: 1; /* <-- ESSA LINHA VOLTOU */
+    transition: all var(--transicao-rapida);
+    position: relative;
+    font-weight: 600;
+}
+
+.btn-nav.ativo {
+    color: var(--cor-primaria);
+}
+
+.btn-nav.ativo::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--cor-primaria);
+    border-radius: 0 0 4px 4px;
+}
+
+.btn-nav:hover {
+    color: var(--cor-primaria);
+}
+
+.icone-nav {
+    font-size: 26px;
+    transition: transform var(--transicao-rapida);
+}
+
+.btn-nav:hover .icone-nav {
+    transform: scale(1.1);
+}
+
+.texto-nav {
+    font-weight: 600;
+}
+
+/* --- FORMULÁRIOS --- */
+.formulario-container {
+    background: var(--cor-fundo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    padding: var(--espacamento-lg);
+    margin: var(--espacamento-md);
+    border: 1px solid var(--cor-borda);
+}
+
+.formulario-container h2 {
+    font-size: 1.4rem;
+    color: var(--cor-primaria);
+    margin-bottom: var(--espacamento-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-sm);
+    font-weight: 700;
+}
+
+.grupo-formulario {
+    margin-bottom: var(--espacamento-lg);
+    position: relative;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: var(--espacamento-sm);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--cor-texto-principal);
+}
+
+.input-formulario {
+    width: 100%;
+    padding: var(--espacamento-md);
+    border-radius: var(--raio-botao);
+    border: 2px solid var(--cor-borda);
+    background: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-size: 1.1rem;
+    transition: all var(--transicao-rapida);
+    font-weight: 600;
+}
+
+.input-formulario:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 4px var(--cor-overlay);
+}
+
+/* --- NOTIFICAÇÕES --- */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cor-primaria);
+    color: white;
+    padding: var(--espacamento-lg);
+    border-radius: var(--raio-borda);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    z-index: 3000;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+}
+
+.notificacao.mostrar {
+    display: block;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.notificacao p {
+    margin-bottom: var(--espacamento-md);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.notificacao .botoes-acao {
+    justify-content: center;
+    gap: var(--espacamento-md);
+}
+
+.notificacao.sucesso {
+    background: var(--cor-secundaria);
+    text-align: center;
+}
+
+/* --- VISÃO SIMPLIFICADA --- */
+/* --- VISÃO SIMPLIFICADA --- */
+.visao-simplificada .texto-nav {
+    display: none; /* Esconde o texto da navegação */
+}
+
+.visao-simplificada .btn-nav {
+    justify-content: center; /* Centraliza o ícone que sobrou */
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.visao-simplificada .icone-nav {
+    font-size: 32px; /* Deixa o ícone maior e mais destacado */
+    margin: 4px 0; /* Adiciona um respiro vertical */
+}
+
+.visao-simplificada .hora-atual,
+.visao-simplificada .detalhes-medicamento {
+    display: none;
+}
+
+.visao-simplificada .saudacao-usuario {
+    font-size: 1.8rem;
+}
+
+.visao-simplificada .nome-medicamento {
+    font-size: 1.5rem;
+}
+
+.visao-simplificada .btn-acao {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    font-size: 22px;
+}
+
+.visao-simplificada .cartao-medicamento {
+    padding: var(--espacamento-lg);
+}
+
+/* --- ESTADO VAZIO --- */
+.estado-vazio {
+    text-align: center;
+    padding: var(--espacamento-xl) var(--espacamento-lg);
+    color: var(--cor-texto-secundario);
+}
+
+.icone-estado-vazio {
+    font-size: 72px;
+    margin-bottom: var(--espacamento-lg);
+    opacity: 0.4;
+}
+
+.estado-vazio p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: var(--espacamento-sm);
+}
+
+/* --- ACESSIBILIDADE EXTRA --- */
+.alto-contraste .cartao-medicamento,
+.alto-contraste .mensagem-boasvindas,
+.alto-contraste .proximo-medicamento,
+.alto-contraste .formulario-container {
+    border: 3px solid var(--cor-texto-principal);
+}
+
+.alto-contraste .btn-principal,
+.alto-contraste .btn-secundario,
+.alto-contraste .btn-acao {
+    border: 3px solid var(--cor-texto-principal);
+}
+
+
+/* --- AJUSTE DE FONTE ESPECIAL PARA A PÁGINA "MEUS MEDICAMENTOS" --- */
+
+/* Em telas normais, diminui a fonte APENAS na página de medicamentos */
+#pagina-medicamentos .nome-medicamento {
+    font-size: 0.93rem; /* O tamanho exato que você achou ideal! */
+}
+
+#pagina-medicamentos .imagem-medicamento {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    font-size: 20px; /* Reduz o emoji dentro do círculo também */
+}
+
+/* Estilo para o nome do arquivo de som salvo */
+.nome-arquivo-salvo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    font-style: italic;
+    display: block;
+    margin-bottom: var(--espacamento-sm);
+    word-break: break-all;
+}
+
+.btn-editar {
+    background: var(--cor-aviso); /* Cor laranja/amarela */
+    color: white;
+}
+.btn-editar:hover {
+    background: #d97706; /* Laranja mais escuro */
+}
+/* --- RESPONSIVIDADE AVANÇADA --- */
+
+@media (max-width: 370px) {
+    .texto-nav {
+        display: none; /* Esconde o texto */
+    }
+    .btn-nav {
+        justify-content: center; /* Centraliza o ícone que sobrou */
+    }
+    .icone-nav {
+        font-size: 30px; /* Deixa o ícone um pouco maior para compensar */
+    }
+}
+
+
+@media (max-width: 380px) {
+    :root {
+        font-size: 16px;
+    }
+    
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    
+    .hora-atual {
+        font-size: 3rem;
+    }
+    
+    .btn-principal {
+        font-size: 1.1rem;
+        padding: var(--espacamento-md);
+    }
+    
+    .cartao-medicamento {
+        padding: var(--espacamento-sm);
+    }
+    
+    .imagem-medicamento {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+    }
+
+    /* Diminui a fonte do nome do remédio e dos detalhes */
+    .nome-medicamento {
+        font-size: 1.0rem;
+    }
+    .detalhes-medicamento {
+        font-size: 0.8rem;
+    }
+
+    /* E também diminui o nome do remédio quando a Visão Simplificada está ativa */
+    .visao-simplificada .nome-medicamento {
+        font-size: 1.2rem; /* Um pouco maior que o normal, mas menor que o padrão da Visão Simplificada */
+    }
+
+    #pagina-medicamentos .nome-medicamento {
+        font-size: 0.691rem;
+    }
+
+    
+}
+
+@media (min-width: 429px) {
+    .nav-inferior {
+        max-width: 480px;
+    }
+    
+    body {
+        max-width: 480px;
+    }
+}
+
+/* --- TABLET E DESKTOP --- */
+@media (min-width: 769px) {
+    body {
+        max-width: 600px;
+    }
+    
+    .nav-inferior {
+        max-width: 600px;
+    }
+    
+    .cartao-medicamento {
+        padding: var(--espacamento-lg);
+    }
+    
+    .btn-nav {
+        flex-direction: row;
+        gap: var(--espacamento-sm);
+        font-size: 0.95rem;
+    }
+}
+
+/* --- ANIMAÇÕES DE HOVER --- */
+@media (hover: hover) {
+    .cartao-medicamento:hover .imagem-medicamento {
+        transform: scale(1.05);
+    }
+}
+
+/* --- SCROLLBAR PERSONALIZADA --- */
+.painel-acessibilidade::-webkit-scrollbar {
+    width: 6px;
+}
+
+.painel-acessibilidade::-webkit-scrollbar-track {
+    background: var(--cor-fundo);
+    border-radius: 3px;
+}
+
+.painel-acessibilidade::-webkit-scrollbar-thumb {
+    background: var(--cor-primaria);
+    border-radius: 3px;
+}
+
+.painel-acessibilidade::-webkit-scrollbar-thumb:hover {
+    background: var(--cor-primaria-escura);
+}
+
+/* --- OVERLAY PARA PAINEL ABERTO --- */
+.painel-acessibilidade.aberto::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    animation: fadeIn var(--transicao-rapida);
+}
+
+/* --- FOCO ACESSÍVEL --- */
+*:focus-visible {
+    outline: 3px solid var(--cor-primaria);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.alto-contraste *:focus-visible {
+    outline: 4px solid var(--cor-texto-principal);
+    outline-offset: 3px;
+}
+
+/* --- SUPORTE PARA PREFERÊNCIAS DO SISTEMA --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* --- TOQUES FINAIS --- */
+::selection {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+/* Garantir que inputs em iOS não tenham zoom indesejado */
+@media screen and (max-width: 428px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* --- MELHORIAS ESPECÍFICAS DO MODO ESCURO --- */
+.modo-escuro .mensagem-boasvindas {
+    background: linear-gradient(135deg, var(--cor-fundo-card), rgba(59, 130, 246, 0.05));
+}
+
+.modo-escuro .hora-atual {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-acento));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modo-escuro .cartao-medicamento {
+    background: linear-gradient(135deg, var(--cor-fundo-card), rgba(59, 130, 246, 0.03));
+}
+
+.modo-escuro .cartao-medicamento::before {
+    background: linear-gradient(180deg, var(--cor-primaria), var(--cor-acento));
+}
+
+/* --- EFEITOS PREMIUM --- */
+.btn-principal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-principal:hover::before {
+    left: 100%;
+}
+
+/* --- BADGES E INDICADORES --- */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--cor-primaria);
+    color: white;
+}
+
+.badge.sucesso {
+    background: var(--cor-secundaria);
+}
+
+.badge.perigo {
+    background: var(--cor-perigo);
+}
+
+/* --- LOADING STATES --- */
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.carregando {
+    background: linear-gradient(
+        90deg,
+        var(--cor-fundo) 0%,
+        var(--cor-borda) 50%,
+        var(--cor-fundo) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* --- MELHORIAS VISUAIS ESPECÍFICAS --- */
+.btn-principal {
+    position: relative;
+    overflow: hidden;
+}
+
+.cartao-medicamento {
+    overflow: hidden;
+}
+
+/* Efeito de brilho no header do modo escuro */
+.modo-escuro header {
+    position: relative;
+}
+
+.modo-escuro header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cor-primaria), transparent);
+}
+
+/* Input com ícone interno */
+.grupo-formulario.assistente .input-assistente {
+    padding-right: 56px;
+}
+
+/* Transições suaves para temas */
+body * {
+    transition: background-color var(--transicao-media), 
+                color var(--transicao-media), 
+                border-color var(--transicao-media);
+}
+
+/* Botões com ripple effect visual */
+.btn-principal,
+.btn-acao,
+.btn-opcao-intervalo {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sombras mais suaves no modo escuro */
+.modo-escuro .cartao-medicamento {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modo-escuro .mensagem-boasvindas {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Separador visual */
+.separador {
+    height: 1px;
+    background: var(--cor-borda);
+    margin: var(--espacamento-lg) 0;
+}
+
+/* Texto destacado */
+.texto-destaque {
+    color: var(--cor-primaria);
+    font-weight: 700;
+}
+
+/* Container flex utilities */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Espaçamentos utilitários */
+.mt-sm { margin-top: var(--espacamento-sm); }
+.mt-md { margin-top: var(--espacamento-md); }
+.mt-lg { margin-top: var(--espacamento-lg); }
+.mb-sm { margin-bottom: var(--espacamento-sm); }
+.mb-md { margin-bottom: var(--espacamento-md); }
+.mb-lg { margin-bottom: var(--espacamento-lg); }
+.p-sm { padding: var(--espacamento-sm); }
+.p-md { padding: var(--espacamento-md); }
+.p-lg { padding: var(--espacamento-lg); }
+
+/* --- FIM DO CSS PREMIUM --- */

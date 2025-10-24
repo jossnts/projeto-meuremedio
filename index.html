@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio</title>
+    <script>
+        // Esta é a única lógica nesta página.
+        // Ela verifica se o usuário já tem um nome salvo.
+        const nomeUsuario = localStorage.getItem('medHelperNomeUsuario');
+        
+        if (nomeUsuario) {
+            // Se já tem nome, vai para a tela principal
+            window.location.href = 'home.html';
+        } else {
+            // Se é a primeira vez, vai para o fluxo de boas-vindas
+            window.location.href = 'boasvindas.html';
+        }
+    </script>
+</head>
+<body>
+    <p>Carregando...</p>
+</body>
+</html>

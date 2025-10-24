@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-pagina="editar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Editar Medicamento</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-editar">
+        <header>
+            <div class="logo">
+                <span class="logo-icone">✏️</span>
+                <h1><span class="texto-titulo-pagina">Editar Medicamento</span></h1>
+            </div>
+            <a href="medicamentos.html" class="btn-acessibilidade" aria-label="Voltar para a lista de medicamentos">✖️</a>
+        </header>
+
+        <div class="formulario-container">
+            <div class="grupo-formulario">
+                <label for="inputNomeRemedio">Nome do Medicamento</label>
+                <input type="text" class="input-formulario" id="inputNomeRemedio">
+            </div>
+            <div class="grupo-formulario">
+                <label for="inputApelidoRemedio">Apelido</label>
+                <input type="text" class="input-formulario" id="inputApelidoRemedio">
+            </div>
+            <div class="grupo-formulario">
+                <label for="inputDose">Dose</label>
+                <input type="text" class="input-formulario" id="inputDose">
+            </div>
+            <div class="grupo-formulario">
+                <label for="inputPrimeiroHorario">Primeiro Horário</label>
+                <input type="time" class="input-formulario" id="inputPrimeiroHorario">
+            </div>
+            <div class="grupo-formulario">
+                <label>Intervalo</label>
+                <div class="opcoes-intervalo assistente">
+                    <button class="btn-opcao-intervalo" data-intervalo="4">4 em 4h</button>
+                    <button class="btn-opcao-intervalo" data-intervalo="6">6 em 6h</button>
+                    <button class="btn-opcao-intervalo" data-intervalo="8">8 em 8h</button>
+                    <button class="btn-opcao-intervalo" data-intervalo="12">12 em 12h</button>
+                    <button class="btn-opcao-intervalo" data-intervalo="24">24 em 24h</button>
+                </div>
+            </div>
+            <div class="grupo-formulario">
+                <label for="inputDuracao">Duração (em dias)</label>
+                <input type="number" class="input-formulario" id="inputDuracao" placeholder="Deixe em branco se for contínuo">
+            </div>
+
+            <button class="btn-principal" id="btnSalvarAlteracoes">Salvar Alterações</button>
+
+            <button class="btn-principal perigo" id="btnExcluirMedicamento">Excluir Remédio</button>
+        </div>
+
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>
