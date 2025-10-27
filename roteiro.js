@@ -344,13 +344,15 @@ document.querySelectorAll('.btn-opcao-intervalo').forEach(btn => {
         inputFoto.addEventListener('change', (e) => {
             const arquivo = e.target.files[0];
            if (arquivo) {
-    localStorage.setItem('medHelperSomNome', arquivo.name); // Salva o nome do arquivo
+    
+             // Salva o nome do arquivo
 
     // --- LINHA DA CORREÇÃO ADICIONADA AQUI ---
     // Atualiza o texto na tela para mostrar o nome do novo arquivo IMEDIATAMENTE.
     const elNomeSom = document.getElementById('nomeSomSalvo');
     if (elNomeSom) {
         elNomeSom.textContent = arquivo.name;
+        localStorage.setItem('medHelperSomNome', arquivo.name);
     }
     // --- FIM DA CORREÇÃO ---
 
@@ -931,13 +933,14 @@ function mostrarNotificacaoTemporaria(mensagem) {
 function configurarOuvintesGlobais() {
     // Painel de Acessibilidade
     const painel = document.getElementById('painelAcessibilidade');
-    
-    document.querySelectorAll('.btn-acessibilidade').forEach(btn => {
-        btn.addEventListener('click', () => {
-            painel.classList.add('aberto');
-            painel.setAttribute('aria-hidden', 'false');
-        });
+const btnAbrirPainel = document.getElementById('btnAbrirPainel'); // Procura pelo ID específico
+
+if (painel && btnAbrirPainel) { // Verifica se ambos existem
+    btnAbrirPainel.addEventListener('click', () => { // Adiciona o evento SÓ nesse botão
+        painel.classList.add('aberto');
+        painel.setAttribute('aria-hidden', 'false');
     });
+    };
 
     // É preciso verificar se os elementos existem, pois não estão em todas as páginas
     const btnFecharPainel = document.getElementById('btnFecharPainel');

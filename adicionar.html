@@ -16,7 +16,7 @@
                     <p class="etapa-texto">(O nome que está na caixa)</p>
                     <div class="grupo-formulario assistente">
                         <label for="inputNomeRemedio" class="etiqueta-assistente">Nome do Medicamento</label>
-                        <input type="text" class="input-assistente" id="inputNomeRemedio" placeholder="Ex: Dipirona">
+                        <input type="text" class="input-assistente" id="inputNomeRemedio" placeholder="Ex: Dipirona" autocomplete="off">
                         <button class="btn-voz" data-para="inputNomeRemedio">🎤</button>
                     </div>
                     <button class="btn-principal" data-acao="proximo">Próximo</button>
@@ -29,8 +29,8 @@
                     <p class="etapa-texto">(Um apelido fácil de lembrar)</p>
                     <div class="grupo-formulario assistente">
                         <label for="inputApelidoRemedio" class="etiqueta-assistente">Apelido</label>
-                        <input type="text" class="input-assistente" id="inputApelidoRemedio" placeholder="Ex: Remédio da dor">
-                        <button class="btn-voz" data-para="inputApelidoRemedio">🎤</button>
+                        <input type="text" class="input-assistente" id="inputApelidoRemedio" placeholder="Ex: Remédio da dor" autocomplete="off">
+                        <button class="btn-voz" data-para="inputApelidoRemedio">🎤</button> 
                     </div>
                     <button class="btn-principal" data-acao="proximo">Próximo</button>
                     <button class="btn-secundario" data-acao="voltar">Voltar</button>
@@ -43,7 +43,7 @@
                     <p class="etapa-texto">(Quantos comprimidos, gotas, etc.)</p>
                     <div class="grupo-formulario assistente">
                         <label for="inputDose" class="etiqueta-assistente">Dose</label>
-                        <input type="text" class="input-assistente" id="inputDose" placeholder="Ex: 1 comprimido">
+                        <input type="text" class="input-assistente" id="inputDose" placeholder="Ex: 1 comprimido" autocomplete="off">
                         <button class="btn-voz" data-para="inputDose">🎤</button>
                     </div>
                     <button class="btn-principal" data-acao="proximo">Próximo</button>
@@ -83,7 +83,7 @@
                     <p class="etapa-texto">(Deixe em branco se for de uso contínuo)</p>
                     <div class="grupo-formulario assistente">
                         <label for="inputDuracao" class="etiqueta-assistente">Duração (em dias)</label>
-                        <input type="number" class="input-assistente" id="inputDuracao" placeholder="Ex: 7">
+                        <input type="number" class="input-assistente" id="inputDuracao" placeholder="Ex: 7" autocomplete="off">
                     </div>
                     <button class="btn-principal" data-acao="proximo">Próximo</button>
                     <button class="btn-secundario" data-acao="voltar">Voltar</button>
@@ -96,7 +96,7 @@
                     <p class="etapa-texto">Isso ajuda a identificar o remédio certo.</p>
                     <div class="grupo-formulario assistente">
                         <label for="inputFoto" class="etiqueta-assistente btn-principal">Tirar Foto / Escolher</label>
-                        <input type="file" id="inputFoto" accept="image/*" capture="environment" class="input-foto">
+                        <input type="file" id="inputFoto" accept="image/*" capture="user" class="input-foto">
                         <img id="previewFoto" class="preview-foto" alt="Pré-visualização da foto">
                     </div>
                     <button class="btn-principal" id="btnSalvarRemedio">Salvar Medicamento</button>

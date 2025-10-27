@@ -628,6 +628,10 @@ header {
     position: relative;
 }
 
+.grupo-formulario.assistente .btn-principal {
+    color: white;
+}
+
 .etiqueta-assistente {
     font-size: 1.05rem;
     font-weight: 700;
@@ -635,6 +639,7 @@ header {
     margin-bottom: var(--espacamento-sm);
     display: block;
 }
+
 
 .input-assistente {
     width: 100%;
