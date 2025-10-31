@@ -47,19 +47,6 @@ if (nomeUsuario && (paginaAtual === 'login' || paginaAtual === 'boasvindas')) {
     window.location.href = 'home.html';
     return; // Para a execução
 }
-
-if (paginaAtual === 'boasvindas') {
-        configurarAssistenteBoasVindas(); // CHAMA A FUNÇÃO ATUALIZADA
-
-        // Botão Começar (Etapa 1 -> Etapa 2)
-    const btnComecar = document.getElementById('btnComecarBoasVindas');
-    if (btnComecar) {
-        btnComecar.addEventListener('click', () => {
-            etapaAtual = 2; // Avança para a primeira dica de acessibilidade/tutorial
-            mostrarEtapa(etapaAtual);
-        });
-    }
-    }
    // 4. Lógica de Ativação da Leitura (CORRIGIDA)
 // Verifica se é a primeira vez que o usuário abre o app.
 if (localStorage.getItem('medHelperLeituraMouse') === null) {
@@ -440,15 +427,6 @@ function configurarAssistente(fluxo) {
     sessionStorage.removeItem('medHelperNovoMedicamento');
     dadosNovoMedicamento = {};
 
-    // Listener do botão Começar (Etapa 1 -> Etapa 2)
-    const btnComecar = document.getElementById('btnComecarBoasVindas');
-    if (btnComecar) {
-        btnComecar.addEventListener('click', () => {
-            etapaAtual = 2; // Avança para a primeira dica de acessibilidade/tutorial
-            mostrarEtapa(etapaAtual);
-        });
-    }
-
     if (fluxo === 'boasvindas') {
         etapaAtual = 1;
         mostrarEtapa(etapaAtual);
@@ -467,11 +445,18 @@ function configurarAssistente(fluxo) {
         btn.addEventListener('click', () => etapaAnterior());
     });
 
- // NOVO: Lógica de Pular Tutorial Completo
+    // NOVO: Lógica de Pular Tutorial Completo
     document.querySelectorAll('.assistente-container [data-acao="pular-tudo"]').forEach(btn => {
         btn.addEventListener('click', () => {
             if (confirm("Tem certeza que deseja pular o tutorial? Você pode perder dicas importantes!")) {
                 etapaAtual = 9; // <-- Pula para a Etapa 9 (Como podemos te chamar?)
+                
+                // Remove o modal invasivo se o usuário pular antes da última etapa
+                const modal = document.getElementById('modalTutorial');
+                const overlay = document.getElementById('modalTutorialOverlay');
+                if (modal) modal.remove();
+                if (overlay) overlay.remove();
+
                 mostrarEtapa(etapaAtual);
             }
         });
@@ -605,22 +590,19 @@ lerEtapaAtualEmVozAlta(() => {
 }
 
 function proximaEtapa() {
-    // 1. Validação e salvamento de dados da etapa ATUAL
-    // Nota: A lógica de validação complexa está dentro de salvarDadosEtapa
+    // Validação e salvamento de dados da etapa ATUAL
     if (!salvarDadosEtapa(etapaAtual)) {
-        // Se a validação falhar (ex: campo vazio), a função para aqui.
+        // Se a validação falhar, não avança
+        falarTexto("Por favor, preencha a informação pedida.");
         return; 
     }
- // 2. Se a validação passou, avança o contador.
+
     etapaAtual++;
-    // O resto do trabalho (mostrar a nova etapa, ler voz, etc.) é feito aqui:
     mostrarEtapa(etapaAtual);
 }
 
 function etapaAnterior() {
-    // 1. A lógica de voltar não precisa de validação de campo.
     etapaAtual--;
-    // 2. Volta a etapa.
     mostrarEtapa(etapaAtual);
 }
 
@@ -643,14 +625,10 @@ function salvarNomeEProximaEtapa() {
     }
 }
 
-
-
 /**
  * Salva os dados da etapa atual no objeto temporário
  */
 // COLE ESTA VERSÃO CORRIGIDA (em roteiro.js)
-// EM: roteiro.js - SUBSTITUA A FUNÇÃO salvarDadosEtapa INTEIRA
-// EM: roteiro.js - SUBSTITUA A FUNÇÃO salvarDadosEtapa INTEIRA
 // EM: roteiro.js - SUBSTITUA A FUNÇÃO salvarDadosEtapa INTEIRA
 function salvarDadosEtapa(numeroEtapa) {
     let input;
@@ -3002,113 +2980,4 @@ function injetarModalTutorial() {
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
-function configurarAssistenteBoasVindas() {
-    const container = document.querySelector('.assistente-container');
-    const etapas = container.querySelectorAll('.etapa');
-    const btnSalvarRemedio = document.getElementById('btnSalvarRemedio');
-
-    function irParaEtapa(etapaDesejada) {
-        if (etapaDesejada < 1 || etapaDesejada > etapas.length) return;
-
-        etapas.forEach(etapa => {
-            const numEtapa = parseInt(etapa.getAttribute('data-etapa'));
-            if (numEtapa === etapaDesejada) {
-                etapa.classList.add('ativa');
-            } else {
-                etapa.classList.remove('ativa');
-            }
-        });
-    }
-
-    container.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-acao]');
-        if (!btn) return;
-
-        const etapaAtiva = container.querySelector('.etapa.ativa');
-        const etapaAtual = parseInt(etapaAtiva.getAttribute('data-etapa'));
-        let proximaEtapa = etapaAtual;
-
-        if (btn.getAttribute('data-acao') === 'proximo') {
-            if (salvarDadosEtapas(etapaAtual)) {
-                proximaEtapa = etapaAtual + 1;
-            }
-        } else if (btn.getAttribute('data-acao') === 'voltar') {
-            proximaEtapa = etapaAtual - 1;
-        }
-
-        irParaEtapa(proximaEtapa);
-    });
-
-    // Listener para as opções de intervalo (Etapa 7)
-    container.addEventListener('click', (e) => {
-        if (e.target.closest('.opcoes-intervalo .btn-opcao-intervalo')) {
-            const btnIntervalo = e.target.closest('.opcoes-intervalo .btn-opcao-intervalo');
-            container.querySelectorAll('.opcoes-intervalo .btn-opcao-intervalo').forEach(b => b.classList.remove('ativo'));
-            btnIntervalo.classList.add('ativo');
-
-            const campoManual = document.getElementById('campoIntervaloManual');
-            if (btnIntervalo.getAttribute('data-intervalo') === 'outro') {
-                campoManual.style.display = 'block';
-            } else {
-                campoManual.style.display = 'none';
-            }
-        }
-    });
-
-
-    // Listener para o botão de salvar final (Etapa 10)
-    if (btnSalvarRemedio) {
-        btnSalvarRemedio.addEventListener('click', () => {
-            // Última verificação antes de salvar o remédio
-            // Não é necessário salvar mais dados aqui, pois já foram salvos nas etapas anteriores
-            
-            // Lógica para salvar a foto (se houver) e finalizar
-            const inputFoto = document.getElementById('inputFoto');
-            if (inputFoto.files.length > 0) {
-                // Aqui entraria a lógica de salvar a foto
-                // Por enquanto, apenas armazena que a foto existe
-                dadosNovoMedicamento.temFoto = true; 
-            } else {
-                 dadosNovoMedicamento.temFoto = false;
-            }
-
-            // Adiciona um ID único para o novo medicamento
-            dadosNovoMedicamento.id = 'med_' + Date.now();
-            
-            // Adiciona o novo medicamento à lista global e salva no localStorage
-            todosMedicamentos.push(dadosNovoMedicamento);
-            localStorage.setItem('medHelperMedicamentos', JSON.stringify(todosMedicamentos));
-            
-            // Limpa o objeto temporário
-            dadosNovoMedicamento = {};
-
-            // Vai para a tela de conclusão (Etapa 11)
-            irParaEtapa(11);
-            
-            // Redireciona para a Home após um pequeno atraso
-            setTimeout(() => {
-                window.location.href = 'home.html';
-            }, 3000);
-        });
-    }
-
-    // Listener para o botão de ir para a Home na conclusão (Etapa 11)
-    const btnIrParaHome = document.getElementById('btnIrParaHome');
-    if (btnIrParaHome) {
-        btnIrParaHome.addEventListener('click', () => {
-             window.location.href = 'home.html';
-        });
-    }
-
-    // Inicializa a Etapa 1
-    irParaEtapa(1);
-
-    // Listener para o botão Começar (Etapa 1)
-    const btnComecar = document.getElementById('btnComecarBoasVindas');
-    if (btnComecar) {
-        btnComecar.addEventListener('click', () => {
-            irParaEtapa(2);
-        });
-    }
-}
 
