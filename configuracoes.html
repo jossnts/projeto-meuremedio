@@ -15,10 +15,11 @@
                 <span class="logo-icone">💊</span>
                 <h1><span class="texto-titulo-pagina">Configurações</span></h1>
             </div>
-            <div class="acessibilidade-header">
-                <button class="btn-acessibilidade" id="btnAbrirPainel" aria-label="Abrir painel de acessibilidade">♿</button>
-                <button class="btn-acessibilidade" id="btnLerPagina" aria-label="Escutar todo o conteúdo da página em voz alta">🔊</button>
-            </div>
+          <div class="acessibilidade-header">
+     <a href="avisos.html" class="btn-acessibilidade ${paginaAtual === 'avisos' ? 'ativo-header' : ''}" aria-label="Ver Avisos Importantes" style="text-decoration: none;">🔔</a>
+    <button class="btn-acessibilidade" id="btnAbrirPainel" aria-label="Abrir painel de acessibilidade">♿</button>
+    <button class="btn-acessibilidade" id="btnLerPagina" aria-label="Escutar todo o conteúdo da página em voz alta">🔊</button>
+</div>
         </header>
 
         <div class="formulario-container">
@@ -30,6 +31,12 @@
                 <button class="btn-voz" data-para="inputNomeConfig">🎤</button>
             </div>
             
+            <div class="grupo-formulario">
+                <label for="btnVerOrientacoes">Informações de Saúde</label>
+                <a href="orientacoes.html" id="btnVerOrientacoes" class="btn-secundario" style="text-align: center; text-decoration: none; padding-top:12px; padding-bottom: 12px;">
+                    Ver Orientações e Dicas
+                </a>
+            </div>
             <div class="grupo-formulario">
                 <label for="btnLimparDados">Limpar Todos os Dados</label>
                 <button class="btn-principal perigo" id="btnLimparDados">Limpar Tudo</button>

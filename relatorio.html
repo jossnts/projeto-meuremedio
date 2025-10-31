@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-pagina="relatorio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Relatório</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        .relatorio-container {
+            padding: var(--espacamento-md);
+        }
+        .bloco-relatorio {
+            background: var(--cor-fundo-card);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: var(--espacamento-md);
+            margin-bottom: var(--espacamento-lg);
+            border: 1px solid var(--cor-borda);
+        }
+        #textoRelatorio {
+            white-space: pre-wrap; /* Mantém quebras de linha e espaços */
+            font-family: monospace; /* Fonte para parecer código/texto simples */
+            font-size: 0.95rem;
+            background-color: var(--cor-fundo);
+            padding: var(--espacamento-sm);
+            border-radius: var(--raio-botao);
+            border: 1px dashed var(--cor-texto-secundario);
+            min-height: 150px;
+        }
+        .guia-gif {
+            text-align: center;
+            margin-top: var(--espacamento-lg);
+        }
+        .guia-gif img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--raio-botao);
+            box-shadow: var(--sombra-card-hover);
+        }
+        .alerta-sucesso {
+            color: var(--cor-secundaria);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--espacamento-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-relatorio">
+        <header>
+            <div class="logo">
+                <span class="logo-icone">💬</span>
+                <h1><span class="texto-titulo-pagina">Relatório WhatsApp</span></h1>
+            </div>
+             <a href="historico.html" class="btn-acessibilidade" aria-label="Voltar para Histórico">✖️</a>
+        </header>
+
+        <div class="relatorio-container">
+            <div class="bloco-relatorio">
+                <h2><span class="texto-titulo-form">📝 Seu Histórico de Doses</span></h2>
+                <div id="textoRelatorio">
+                    Carregando dados...
+                </div>
+                <div id="msgCopia" class="alerta-sucesso" style="display: none;">
+                    ✅ Texto copiado!
+                </div>
+                <button class="btn-principal" id="btnCopiarRelatorio" aria-label="Copiar todo o texto do relatório">
+                    Copiar Relatório
+                </button>
+            </div>
+            
+            <div class="guia-gif">
+                <h2><span class="texto-titulo-form">👉 Como Enviar</span></h2>
+                <p class="etapa-texto">1. Toque em Copiar.</p>
+                <p class="etapa-texto">2. Entre no WhatsApp e cole na conversa.</p>
+                <img id="gifTutorial" src="[GIF do Tutorial será inserido aqui]" alt="Guia visual de como copiar e colar no WhatsApp." style="display:none; margin-top:10px;">
+            </div>
+        </div>
+    </div>
+    
+    <script src="roteiro.js"></script>
+</body>
+</html>

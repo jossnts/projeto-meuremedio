@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-pagina="login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Login</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: var(--espacamento-lg);
+            text-align: center;
+        }
+        .logo-login {
+            font-size: 4rem;
+            margin-bottom: var(--espacamento-md);
+        }
+        .titulo-login {
+            font-size: 2rem;
+            color: var(--cor-primaria);
+            margin-bottom: var(--espacamento-lg);
+        }
+        .botao-login {
+            width: 100%;
+            padding: var(--espacamento-xl) var(--espacamento-lg); /* Botões bem grandes */
+            font-size: 1.5rem;
+            margin-bottom: var(--espacamento-md);
+            border-radius: var(--raio-borda);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .botao-login:active {
+            transform: scale(0.98);
+        }
+        .campo-senha-demo {
+            margin-top: var(--espacamento-lg);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-login">💊</div>
+        <h1 class="titulo-login">MeuRemédio - Faça seu login</h1>
+
+      <div class="opcoes-login-container"> <div id="btnEntrarSemConta" class="login-opcao" role="button" tabindex="0" aria-label="Entrar sem conta, usar neste aparelho">
+        <span class="login-icone">👤</span>
+        <span class="login-texto">Entrar como Visitante</span>
+    </div>
+
+    <div id="btnEntrarComContaDemo" class="login-opcao principal" role="button" tabindex="0" aria-label="Entrar com conta demonstração">
+        <span class="login-icone">🔒</span>
+        <span class="login-texto">Conta Demonstração</span>
+    </div>
+</div>
+
+        <div id="campoSenhaDemo" class="grupo-formulario assistente campo-senha-demo" style="display: none;">
+            <label for="inputSenhaDemo" class="etiqueta-assistente">Digite a palavra chave:</label>
+            <input type="password" class="input-assistente" id="inputSenhaDemo" placeholder="Palavra chave da demonstração">
+            <button id="btnConfirmarSenhaDemo" class="btn-principal" style="margin-top: var(--espacamento-sm);">Confirmar</button>
+            <button id="btnCancelarSenhaDemo" class="btn-secundario" style="margin-top: var(--espacamento-xs);">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>

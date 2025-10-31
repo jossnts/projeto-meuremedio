@@ -28,6 +28,10 @@
                 <input type="text" class="input-formulario" id="inputApelidoRemedio" autocomplete="off">
             </div>
             <div class="grupo-formulario">
+                <label for="inputCorRemedio">Cor (Opcional)</label>
+                <input type="text" class="input-formulario" id="inputCorRemedio" autocomplete="off">
+            </div>
+            <div class="grupo-formulario">
                 <label for="inputDose">Dose</label>
                 <input type="text" class="input-formulario" id="inputDose" autocomplete="off">
             </div>
@@ -49,6 +53,18 @@
                 <label for="inputDuracao">Duração (em dias)</label>
                 <input type="number" class="input-formulario" id="inputDuracao" placeholder="Deixe em branco se for contínuo" autocomplete="off">
             </div>
+
+            <div class="grupo-formulario assistente">
+    <label class="etiqueta-assistente">
+        <input type="checkbox" id="checkOrientacaoMedica" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 10px;">
+        Este remédio tem orientações médicas especiais?
+    </label>
+    <div id="campoOrientacaoMedica" style="display: none; margin-top: 10px;">
+        <label for="inputOrientacaoMedica" class="etiqueta-assistente">Quais orientações?</label>
+        <textarea id="inputOrientacaoMedica" class="input-assistente" rows="3" placeholder="Digite ou use o microfone..."></textarea>
+        <button class="btn-voz" data-para="inputOrientacaoMedica">🎤</button>
+    </div>
+</div>
 
             <button class="btn-principal" id="btnSalvarAlteracoes">Salvar Alterações</button>
 

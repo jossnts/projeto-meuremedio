@@ -143,7 +143,7 @@ body {
 /* --- LAYOUT DA PÁGINA --- */
 .pagina {
     padding: 0;
-    padding-bottom: 90px;
+    padding-bottom: 110px; /* <-- AUMENTEI PARA 110PX (Era 90px) */
     min-height: 100vh;
     animation: fadeIn var(--transicao-media);
 }
@@ -472,6 +472,7 @@ header {
     cursor: pointer;
     margin-top: var(--espacamento-sm);
     transition: all var(--transicao-rapida);
+    display: block;
 }
 
 .btn-secundario:hover {
@@ -750,16 +751,20 @@ header {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(650px, 100%);
+    
+    /* CORREÇÃO: Usa 100% da largura, mas respeita o max-width do body */
+    width: 100%; 
+    max-width: 428px; /* <-- Usa o mesmo max-width do body */
+    
     border-radius: 5px;
     background: var(--cor-fundo-card);
     display: flex;
-    justify-content: space-around; /* <-- VOLTOU AO NORMAL */
+    justify-content: space-around;
     padding: var(--espacamento-sm) 0;
     box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
     z-index: 100;
     border-top: 1px solid var(--cor-borda);
-    overflow: hidden; /* Garante que nada transborde */
+    overflow: hidden; 
 }
 
 .btn-nav {
@@ -864,54 +869,172 @@ header {
     box-shadow: 0 0 0 4px var(--cor-overlay);
 }
 
-/* --- NOTIFICAÇÕES --- */
-.notificacao {
+
+/* --- NOVAS NOTIFICAÇÕES MODAIS --- */
+
+/* O fundo desfocado */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2999;
+    display: none; /* Controlado por JS */
+    animation: fadeIn 0.3s ease;
+}
+
+/* A Janela Flutuante (base) */
+.modal-notificacao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 380px;
+    background-color: var(--cor-primaria);
+    color: white;
+    border-radius: var(--raio-borda);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
+    padding: var(--espacamento-lg);
+    text-align: center;
+    display: none; /* Controlado por JS */
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Variação Vermelha para Atraso */
+.modal-notificacao.modo-atraso {
+    background-color: var(--cor-perigo);
+}
+
+.modal-notificacao p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--espacamento-lg);
+}
+
+.icone-modal-atraso {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--espacamento-sm);
+}
+
+/* Container dos botões */
+.botoes-modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-sm);
+}
+
+.botoes-soneca-container {
+    display: flex;
+    gap: var(--espacamento-sm);
+}
+
+/* Estilo dos botões */
+.btn-modal {
+    width: 100%;
+    padding: var(--espacamento-md);
+    border: none;
+    border-radius: var(--raio-botao);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+/* Botão Verde - Tomei Agora */
+.btn-modal.btn-tomar {
+    background-color: var(--cor-secundaria);
+    color: white;
+    font-size: 1.2rem; /* Maior destaque */
+}
+.btn-modal.btn-tomar:hover {
+    background-color: var(--cor-secundaria-hover);
+}
+
+/* Botões de Soneca (Adiar) */
+.btn-modal.btn-soneca {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn-modal.btn-soneca:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Botão "OK, vou tomar" (Cinza claro, só fecha) */
+.btn-modal.btn-ok {
+    background-color: var(--cor-texto-secundario);
+    color: white;
+}
+ .btn-modal.btn-ok:hover {
+    opacity: 0.8;
+ }
+
+/* Botão Pular (Vermelho, mas mais sutil) */
+.btn-modal.btn-pular {
+    background-color: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    opacity: 0.8;
+}
+ .btn-modal.btn-pular:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+ }
+
+/* Notificação verde de sucesso (continua a mesma) */
+.notificacao.sucesso {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--cor-primaria);
+    background-color: var(--cor-secundaria);
     color: white;
-    padding: var(--espacamento-lg);
+    padding: 16px 22px;
     border-radius: var(--raio-borda);
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    z-index: 3000;
+    z-index: 3001;
     display: none;
     width: 90%;
     max-width: 400px;
+    text-align: center;
 }
 
-.notificacao.mostrar {
+.notificacao.sucesso.mostrar {
     display: block;
-    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: surgirDescer 4s forwards;
+}
+
+/* Animações (a sua antiga e a nova) */
+@keyframes surgirDescer {
+    0% { opacity: 0; top: 0px; }
+    10% { opacity: 1; top: 20px; }
+    90% { opacity: 1; top: 20px; }
+    100% { opacity: 0; top: 0px; }
 }
 
 @keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(-50px);
+        transform: translate(-50%, -70%);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translate(-50%, -50%);
     }
 }
 
-.notificacao p {
-    margin-bottom: var(--espacamento-md);
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.4;
-}
-
-.notificacao .botoes-acao {
-    justify-content: center;
-    gap: var(--espacamento-md);
-}
-
-.notificacao.sucesso {
-    background: var(--cor-secundaria);
-    text-align: center;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* --- VISÃO SIMPLIFICADA --- */
@@ -1020,13 +1143,327 @@ header {
 .btn-editar:hover {
     background: #d97706; /* Laranja mais escuro */
 }
+
+/* Ícone de Alerta para Orientação Médica */
+.icone-alerta-orientacao {
+    color: var(--cor-aviso); /* Laranja */
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 1em; /* Tamanho relativo ao texto ao redor */
+}
+
+/* --- DESTAQUE PARA CARTÃO COM ORIENTAÇÃO MÉDICA --- */
+
+/* Remove a linha azul padrão quando há orientação */
+.cartao-medicamento.orientacao-especial::before {
+    display: none; 
+}
+
+/* Adiciona uma borda amarela grossa à esquerda */
+.cartao-medicamento.orientacao-especial {
+    border-left: 6px solid var(--cor-aviso); /* Borda amarela mais grossa */
+    /* Ajuste opcional de padding para compensar a borda, se necessário */
+    /* padding-left: calc(var(--espacamento-md) - 4px); */ 
+}
+
+/* Garante que o ícone de alerta continue visível */
+.cartao-medicamento.orientacao-especial .icone-alerta-orientacao {
+    display: inline; /* Garante que o ⚠️ apareça */
+}
+
+/* --- HOVER ESPECIAL PARA CARTÃO COM ORIENTAÇÃO --- */
+
+.cartao-medicamento.orientacao-especial {
+    transition: all var(--transicao-rapida); /* Garante a transição suave */
+}
+
+/* Ao passar o mouse sobre o cartão especial */
+.cartao-medicamento.orientacao-especial:hover {
+    border-left-width: 8px; /* Deixa a borda um pouco mais grossa */
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3); /* Adiciona uma sombra/brilho amarelo (cor --cor-aviso) */
+    transform: translateY(-2px); /* Efeito de 'levantar' sutil */
+}
+
+.opcoes-login-container {
+    display: flex;
+    justify-content: space-around; /* Espaça os dois botões */
+    align-items: stretch; /* Faz com que tenham a mesma altura */
+    gap: var(--espacamento-md); /* Espaço entre os botões */
+    width: 100%;
+    margin-bottom: var(--espacamento-lg);
+}
+
+.login-opcao {
+    flex: 1; /* Faz cada opção ocupar metade do espaço */
+    background-color: var(--cor-fundo-card);
+    border: 2px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: var(--espacamento-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+    box-shadow: var(--sombra-card);
+}
+
+.login-opcao:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-card-hover);
+    border-color: var(--cor-primaria-clara);
+}
+
+.login-opcao:active {
+    transform: scale(0.98);
+}
+
+/* Estilo especial para o botão principal (Conta Demo) */
+.login-opcao.principal {
+    border-color: var(--cor-primaria);
+    background-color: var(--cor-overlay);
+}
+.login-opcao.principal:hover {
+    background-color: var(--cor-primaria);
+}
+ .login-opcao.principal:hover .login-icone,
+ .login-opcao.principal:hover .login-texto {
+     color: white; /* Muda a cor do ícone/texto no hover */
+ }
+
+
+.login-icone {
+    font-size: 4rem; /* Ícone bem grande */
+    margin-bottom: var(--espacamento-sm);
+    color: var(--cor-primaria);
+    transition: color var(--transicao-rapida);
+}
+
+.login-texto {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    transition: color var(--transicao-rapida);
+}
+
+/* Remove o estilo antigo dos botões que não usamos mais */
+.botao-login {
+   display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+/* --- ESTILO PARA AVISOS MARCADOS COMO VISTOS --- */
+
+.aviso-item.visto {
+    opacity: 0.6; /* Deixa o aviso mais apagado */
+    border-left-color: var(--cor-texto-secundario); /* Muda a cor da borda para cinza */
+    background-color: var(--cor-fundo); /* Pode usar a cor de fundo geral para 'sumir' mais */
+}
+
+/* Opcional: Remover a sombra para parecer menos importante */
+.aviso-item.visto {
+    box-shadow: none;
+}
+
+/* Opcional: Mudar a cor do texto também */
+.aviso-item.visto .aviso-texto {
+     color: var(--cor-texto-secundario);
+}
+
+/* CÓDIGO PARA ADICIONAR NO FINAL DO CSS */
+
+/* --- ESTILO PARA HISTÓRICO COM ATRASO/PULADO --- */
+
+/* Define o fundo e a borda para atrasos graves ou doses puladas */
+.item-historico.atraso-grave,
+.item-historico.pulado-grave {
+    background-color: #FFF1F2; /* Um fundo vermelho bem claro */
+    border-left: 4px solid var(--cor-perigo); /* Borda esquerda vermelha */
+}
+
+/* Ajusta as cores para o modo escuro */
+.modo-escuro .item-historico.atraso-grave,
+.modo-escuro .item-historico.pulado-grave {
+    background-color: #3B1B1F; /* Um fundo vermelho escuro */
+    border-left-color: var(--cor-perigo);
+}
+
+/* Ajusta as cores para alto contraste */
+.alto-contraste .item-historico.atraso-grave,
+.alto-contraste .item-historico.pulado-grave {
+    background-color: #000;
+    border: 3px solid var(--cor-perigo); /* Borda vermelha de alto contraste */
+}
+
+/* CÓDIGO PARA ADICIONAR NO CSS */
+
+/* --- ESTILOS PARA NOVOS BOTÕES DE NOTIFICAÇÃO --- */
+.botoes-acao-soneca {
+    display: flex;
+    justify-content: space-around; /* Espaça os botões de soneca/pular */
+    gap: 10px;
+}
+
+.btn-acao-notif {
+    padding: 10px;
+    border: none;
+    border-radius: var(--raio-botao);
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1; /* Faz com que ocupem espaço igual */
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-acao-notif.btn-soneca {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn-acao-notif.btn-soneca:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-acao-notif.btn-pular {
+    background-color: var(--cor-perigo);
+    color: white;
+}
+.btn-acao-notif.btn-pular:hover {
+     background-color: var(--cor-perigo-hover);
+}
+
+/* COLE NO FINAL DE estilo.css */
+
+/* Deixa o modal "ciente" do botão absoluto */
+
+/* --- NOVO ESTILO PARA O BOTÃO FECHAR --- */
+.btn-fechar-modal {
+    position: absolute;
+    top: var(--espacamento-sm);
+    right: var(--espacamento-sm);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transicao-rapida);
+    z-index: 3001; /* Garante que fique acima do texto */
+}
+
+.btn-fechar-modal:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Ajuste para o modal de atraso (fundo vermelho) */
+.modal-notificacao.modo-atraso .btn-fechar-modal {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.modal-notificacao.modo-atraso .btn-fechar-modal:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* COLE NO FINAL DE estilo.css */
+
+/* --- ESTILO PARA CARTÃO ATRASADO (HOME) --- */
+
+/* Remove a borda azul padrão */
+.cartao-medicamento.atrasado::before {
+    display: none;
+}
+
+/* Adiciona uma borda vermelha grossa */
+.cartao-medicamento.atrasado {
+    border-left: 6px solid var(--cor-perigo);
+    background-color: #FFF1F2; /* Fundo vermelho bem claro (do histórico) */
+}
+
+/* Ao passar o mouse, dá um brilho vermelho */
+.cartao-medicamento.atrasado:hover {
+    border-left-width: 8px;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3); /* Sombra --cor-perigo */
+    transform: translateY(-2px);
+}
+
+/* Ajuste para modo escuro */
+.modo-escuro .cartao-medicamento.atrasado {
+    background-color: #3B1B1F; /* Fundo vermelho escuro (do histórico) */
+}
+
+/* Prioriza o vermelho (atraso) sobre o amarelo (orientação) */
+.cartao-medicamento.atrasado.orientacao-especial {
+    border-left-color: var(--cor-perigo);
+}
+
+/* COLE NO FINAL DE estilo.css */
+
+/* --- TAG DE COR DO REMÉDIO (FASE 3) --- */
+.cor-medicamento {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-borda);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-right: var(--espacamento-xs);
+    
+    /* Evita que a tag quebre a linha no meio */
+    white-space: nowrap;
+    
+    /* Garante alinhamento com o texto */
+    vertical-align: middle;
+}
+
+/* Ajuste para modo escuro */
+.modo-escuro .cor-medicamento {
+    background-color: var(--cor-fundo); /* Fundo mais escuro */
+    color: var(--cor-texto-principal); /* Texto claro */
+}
+
+/* Ajuste para alto contraste */
+.alto-contraste .cor-medicamento {
+    border: 2px solid var(--cor-texto-secundario); /* Borda amarela */
+    color: var(--cor-texto-secundario); /* Texto amarelo */
+    background-color: #000;
+}
 /* --- RESPONSIVIDADE AVANÇADA --- */
 
-@media (max-width: 370px) {
+
+
+@media (max-width: 400px) { /* <-- VALOR ALTERADO AQUI */
+
+    .nav-inferior .texto-nav {
+        display: none; 
+    }
+    .nav-inferior .btn-nav {
+        justify-content: center; /* Centraliza o ícone que sobrou */
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    .nav-inferior .icone-nav {
+        font-size: 30px; /* Deixa o ícone um pouco maior */
+    }
+    /* --- FIM DA CORREÇÃO --- */
+    
+    .texto-nav {
+        display: none; /* Regra que você já tinha, mas vamos garantir */
+    }
     .texto-nav {
         display: none; /* Esconde o texto */
     }
-    .btn-nav {
+   .btn-nav {
         justify-content: center; /* Centraliza o ícone que sobrou */
     }
     .icone-nav {
@@ -1085,9 +1522,8 @@ header {
 
 @media (min-width: 429px) {
     .nav-inferior {
-        max-width: 480px;
+        max-width: 480px; /* Alinha com o body ajustado aqui */
     }
-    
     body {
         max-width: 480px;
     }
@@ -1100,9 +1536,8 @@ header {
     }
     
     .nav-inferior {
-        max-width: 600px;
+        max-width: 600px; /* Alinha com o body ajustado aqui */
     }
-    
     .cartao-medicamento {
         padding: var(--espacamento-lg);
     }

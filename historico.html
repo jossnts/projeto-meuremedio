@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-pagina="historico">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuRemédio - Histórico</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        .historico-container {
+            padding: var(--espacamento-md);
+        }
+        .grupo-dia {
+            margin-bottom: var(--espacamento-lg);
+        }
+        .titulo-dia {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cor-texto-principal);
+            padding-bottom: var(--espacamento-sm);
+            border-bottom: 2px solid var(--cor-borda);
+            margin-bottom: var(--espacamento-md);
+        }
+        .item-historico {
+            display: flex;
+            align-items: center;
+            gap: var(--espacamento-sm);
+            padding: var(--espacamento-sm);
+            background-color: var(--cor-fundo-card);
+            border-radius: var(--raio-botao);
+            margin-bottom: var(--espacamento-sm);
+            box-shadow: var(--sombra-card);
+        }
+        .icone-status {
+            font-size: 1.5rem;
+        }
+        .detalhes-historico {
+            flex: 1;
+        }
+        .nome-historico {
+            font-weight: 600;
+        }
+        .status-historico {
+            font-size: 0.9rem;
+            color: var(--cor-texto-secundario);
+        }
+        .status-ok { color: var(--cor-secundaria); }
+        .status-atraso { color: var(--cor-aviso); }
+        .status-pulado { color: var(--cor-perigo); }
+    </style>
+</head>
+<body>
+    <div class="pagina ativa" id="pagina-historico">
+        <header>
+    <div class="logo">
+        <span class="logo-icone">📋</span>
+        <h1><span class="texto-titulo-pagina">Histórico de Doses</span></h1>
+    </div>
+
+    
+
+    <div class="acessibilidade-header">
+        <a href="avisos.html" class="btn-acessibilidade" aria-label="Ver Avisos Importantes" style="text-decoration: none;">🔔</a>
+        <button class="btn-acessibilidade" id="btnAbrirPainel" aria-label="Abrir painel de acessibilidade">♿</button>
+        <button class="btn-acessibilidade" id="btnLerPagina" aria-label="Escutar todo o conteúdo da página em voz alta">🔊</button>
+    </div>
+</header>
+
+        <div class="historico-container" id="listaHistorico">
+    </div>
+    <div style="padding: 0 var(--espacamento-md);">
+            <button id="btnGerarRelatorio" class="btn-principal" style="margin-top: var(--espacamento-md); margin-bottom: 90px;">
+                Gerar Relatório para Cuidador 💬
+            </button>
+        </div>
+    </div>
+
+<div class="estado-vazio" id="semHistorico" style="display: none;">
+    <div class="icone-estado-vazio">🤔</div>
+    
+    <p>Nenhum histórico encontrado.</p>
+    <p>Comece a tomar seus remédios para ver o registro aqui.</p>
+    
+</div>
+        </div>
+
+       
+    </div>
+
+    <script src="roteiro.js"></script>
+</body>
+</html>

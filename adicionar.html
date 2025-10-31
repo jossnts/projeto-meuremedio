@@ -41,6 +41,20 @@
 
             <div class="etapa" data-etapa="3">
                 <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Qual a cor do remédio?</h2>
+                    <p class="etapa-texto">(Opcional. Ex: Azul, Branco, etc.)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputCorRemedio" class="etiqueta-assistente">Cor</label>
+                        <input type="text" class="input-assistente" id="inputCorRemedio" placeholder="Ex: Azul" autocomplete="off">
+                        <button class="btn-voz" data-para="inputCorRemedio">🎤</button> 
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
+
+            <div class="etapa" data-etapa="4">
+                <div class="conteudo-etapa">
                     <h2 class="etapa-titulo">Qual é a dose?</h2>
                     <p class="etapa-texto">(Quantos comprimidos, gotas, etc.)</p>
                     <div class="grupo-formulario assistente">
@@ -53,7 +67,7 @@
                 </div>
             </div>
             
-            <div class="etapa" data-etapa="4">
+            <div class="etapa" data-etapa="5">
                 <div class="conteudo-etapa">
                     <h2 class="etapa-titulo">Qual o primeiro horário que você vai tomar?</h2>
                     <div class="grupo-formulario assistente">
@@ -65,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="etapa" data-etapa="5">
+            <div class="etapa" data-etapa="6">
                 <div class="conteudo-etapa">
                     <h2 class="etapa-titulo">De quanto em quanto tempo?</h2>
                     <div class="opcoes-intervalo assistente">
@@ -79,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="etapa" data-etapa="6">
+            <div class="etapa" data-etapa="7">
                 <div class="conteudo-etapa">
                     <h2 class="etapa-titulo">Por quantos dias?</h2>
                     <p class="etapa-texto">(Deixe em branco se for de uso contínuo)</p>
@@ -92,7 +106,28 @@
                 </div>
             </div>
 
-            <div class="etapa" data-etapa="7">
+            <div class="etapa" data-etapa="8">
+            <div class="conteudo-etapa">
+                <h2 class="etapa-titulo">Orientações Médicas</h2>
+                <p class="etapa-texto">Seu Médico deu alguma instrução especial para este remédio?</p>
+
+         <div class="grupo-formulario assistente">
+    <label class="etiqueta-assistente">
+        <input type="checkbox" id="checkOrientacaoMedica" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 10px;">
+        Sim, este remédio tem orientações médicas especiais.
+    </label>
+    <div id="campoOrientacaoMedica" style="display: none; margin-top: 10px;">
+        <label for="inputOrientacaoMedica" class="etiqueta-assistente">Quais orientações?</label>
+        <textarea id="inputOrientacaoMedica" class="input-assistente" rows="3" placeholder="Digite ou use o microfone..."></textarea>
+        <button class="btn-voz" data-para="inputOrientacaoMedica">🎤</button>
+    </div>
+</div>
+        <button class="btn-principal" data-acao="proximo">Próximo</button>
+        <button class="btn-secundario" data-acao="voltar">Voltar</button>
+</div>
+</div>
+
+            <div class="etapa" data-etapa="9">
                 <div class="conteudo-etapa">
                     <h2 class="etapa-titulo">Quer tirar uma foto do remédio?</h2>
                     <p class="etapa-texto">Isso ajuda a identificar o remédio certo.</p>
@@ -101,12 +136,14 @@
                         <input type="file" id="inputFoto" accept="image/*" capture="user" class="input-foto">
                         <img id="previewFoto" class="preview-foto" alt="Pré-visualização da foto">
                     </div>
+
+             
                     <button class="btn-principal" id="btnSalvarRemedio">Salvar Medicamento</button>
                     <button class="btn-secundario" data-acao="voltar">Voltar</button>
                 </div>
             </div>
 
-            <div class="etapa" data-etapa="8">
+            <div class="etapa" data-etapa="10">
                 <div class="conteudo-etapa">
                     <div class="etapa-icone">🎉</div>
                     <h2 class="etapa-titulo">Medicamento salvo!</h2>

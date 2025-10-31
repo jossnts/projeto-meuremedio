@@ -11,16 +11,86 @@
 <body>
     <div class="assistente-container">
         
-        <div class="etapa ativa" data-etapa="1">
+       <div class="etapa aciva" data-etapa="1">
             <div class="conteudo-etapa">
                 <div class="etapa-icone">💊</div>
                 <h1 class="etapa-titulo">Bem-vindo ao MeuRemédio</h1>
                 <p class="etapa-texto">Seu assistente de medicamentos acessível.</p>
-                <button class="btn-principal" id="btnComecarBoasVindas">Começar</button>
+                <button class="btn-principal" data-acao="proximo">Começar</button>
             </div>
         </div>
 
         <div class="etapa" data-etapa="2">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">♿</div>
+                <h2 class="etapa-titulo">Acessibilidade é Prioridade</h2>
+                <p class="etapa-texto">O MeuRemédio fala. Você pode ajustar o tamanho da letra e ativar a leitura por voz a qualquer momento, usando o ícone de cadeira de rodas.</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="pular-tudo">Pular Tutorial</button>
+            </div>
+        </div>
+
+        <div class="etapa" data-etapa="3">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">🔒</div>
+                <h2 class="etapa-titulo">Confirmação Reforçada</h2>
+                <p class="etapa-texto">Doses na hora ou atrasadas são registradas com um clique. Mas para tomar **adiantado**, você precisa clicar 3 vezes no botão (✓) para confirmar. Isso evita erros!</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+        
+        <div class="etapa" data-etapa="4">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">🔴</div>
+                <h2 class="etapa-titulo">Alerta de Atraso</h2>
+                <p class="etapa-texto">Se você se esquecer, o cartão do remédio na tela inicial ficará vermelho e o app te avisará a cada 10 minutos até você tomar ou pular a dose.</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+
+        <div class="etapa" data-etapa="5">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">⚠️</div>
+                <h2 class="etapa-titulo">Orientações do Médico</h2>
+                <p class="etapa-texto">Você pode salvar as instruções do seu médico (como 'tomar após o jantar') no cadastro. O app lerá isso em voz alta junto com o lembrete.</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+
+        <div class="etapa" data-etapa="6">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">📸</div>
+                <h2 class="etapa-titulo">Foto e Cor</h2>
+                <p class="etapa-texto">Cadastre a cor ou tire uma foto do remédio. Isso facilita a identificação rápida e ajuda a não confundir os comprimidos no pote.</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+
+        <div class="etapa" data-etapa="7">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">💬</div>
+                <h2 class="etapa-titulo">Relatórios via WhatsApp</h2>
+                <p class="etapa-texto">No Histórico, você pode gerar um relatório completo da semana e copiá-lo facilmente para enviar ao seu cuidador ou familiar.</p>
+                <button class="btn-principal" data-acao="proximo">Próximo</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+
+        <div class="etapa" data-etapa="8">
+            <div class="conteudo-etapa">
+                <div class="etapa-icone">✅</div>
+                <h2 class="etapa-titulo">Vamos Começar!</h2>
+                <p class="etapa-texto">Lembre-se: use o aplicativo apenas para organizar o que seu médico receitou. Sua segurança vem em primeiro lugar.</p>
+                <button class="btn-principal" data-acao="proximo">Próxima Etapa</button>
+                <button class="btn-secundario" data-acao="voltar">Voltar</button>
+            </div>
+        </div>
+        
+        <div class="etapa" data-etapa="9">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Como podemos te chamar?</h2>
                 <p class="etapa-texto">Você pode digitar ou usar o microfone.</p>
@@ -34,7 +104,7 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="3">
+        <div class="etapa" data-etapa="10">
             <div class="conteudo-etapa">
                 <div class="etapa-icone">➕</div>
                 <h2 class="etapa-titulo">Vamos cadastrar seu primeiro remédio?</h2>
@@ -44,7 +114,7 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="4">
+        <div class="etapa" data-etapa="11">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Qual o nome do remédio?</h2>
                 <p class="etapa-texto">(O nome que está na caixa)</p>
@@ -57,7 +127,7 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="5">
+        <div class="etapa" data-etapa="12">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Como você chama esse remédio?</h2>
                 <p class="etapa-texto">(Um apelido fácil de lembrar)</p>
@@ -70,8 +140,22 @@
                 <button class="btn-secundario" data-acao="voltar">Voltar</button>
             </div>
         </div>
+        
+        <div class="etapa" data-etapa="13">
+                <div class="conteudo-etapa">
+                    <h2 class="etapa-titulo">Qual a cor do remédio?</h2>
+                    <p class="etapa-texto">(Opcional. Ex: Azul, Branco, etc.)</p>
+                    <div class="grupo-formulario assistente">
+                        <label for="inputCorRemedio" class="etiqueta-assistente">Cor</label>
+                        <input type="text" class="input-assistente" id="inputCorRemedio" placeholder="Ex: Azul" autocomplete="off">
+                        <button class="btn-voz" data-para="inputCorRemedio">🎤</button> 
+                    </div>
+                    <button class="btn-principal" data-acao="proximo">Próximo</button>
+                    <button class="btn-secundario" data-acao="voltar">Voltar</button>
+                </div>
+            </div>
 
-        <div class="etapa" data-etapa="6">
+        <div class="etapa" data-etapa="14">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Qual é a dose?</h2>
                 <p class="etapa-texto">(Quantos comprimidos, gotas, etc.)</p>
@@ -85,7 +169,7 @@
             </div>
         </div>
         
-        <div class="etapa" data-etapa="7">
+        <div class="etapa" data-etapa="15">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Qual o primeiro horário que você vai tomar?</h2>
                 <div class="grupo-formulario assistente">
@@ -97,7 +181,7 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="8">
+        <div class="etapa" data-etapa="16">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">De quanto em quanto tempo?</h2>
                 <div class="opcoes-intervalo assistente">
@@ -111,7 +195,7 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="9">
+        <div class="etapa" data-etapa="17">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Por quantos dias?</h2>
                 <p class="etapa-texto">(Deixe em branco se for de uso contínuo)</p>
@@ -124,7 +208,28 @@
             </div>
         </div>
 
-        <div class="etapa" data-etapa="10">
+        <div class="etapa" data-etapa="18">
+            <div class="conteudo-etapa">
+                <h2 class="etapa-titulo">Orientações Médicas</h2>
+                <p class="etapa-texto">Seu Médico deu alguma instrução especial para este remédio?</p>
+
+         <div class="grupo-formulario assistente">
+    <label class="etiqueta-assistente">
+        <input type="checkbox" id="checkOrientacaoMedica" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 10px;">
+        Sim, este remédio tem orientações médicas especiais.
+    </label>
+    <div id="campoOrientacaoMedica" style="display: none; margin-top: 10px;">
+        <label for="inputOrientacaoMedica" class="etiqueta-assistente">Quais orientações?</label>
+        <textarea id="inputOrientacaoMedica" class="input-assistente" rows="3" placeholder="Digite ou use o microfone..."></textarea>
+        <button class="btn-voz" data-para="inputOrientacaoMedica">🎤</button>
+    </div>
+</div>
+        <button class="btn-principal" data-acao="proximo">Próximo</button>
+        <button class="btn-secundario" data-acao="voltar">Voltar</button>
+</div>
+</div>
+
+        <div class="etapa" data-etapa="19">
             <div class="conteudo-etapa">
                 <h2 class="etapa-titulo">Quer tirar uma foto do remédio?</h2>
                 <p class="etapa-texto">Isso ajuda a identificar o remédio certo.</p>
@@ -133,12 +238,17 @@
                     <input type="file" id="inputFoto" accept="image/*" capture="environment" class="input-foto">
                     <img id="previewFoto" class="preview-foto" alt="Pré-visualização da foto">
                 </div>
+                
+
+
+            
+
                 <button class="btn-principal" id="btnSalvarRemedio">Salvar e Concluir</button>
                 <button class="btn-secundario" data-acao="voltar">Voltar</button>
             </div>
         </div>
 
-        <div class="etapa" data-etapa="11">
+        <div class="etapa" data-etapa="20">
             <div class="conteudo-etapa">
                 <div class="etapa-icone">🎉</div>
                 <h2 class="etapa-titulo" id="tituloConclusao">Tudo pronto, [Nome]!</h2>
