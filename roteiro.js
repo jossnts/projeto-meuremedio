@@ -806,7 +806,6 @@ function atualizarSaudacao() {
 // COLE ESTA VERSÃO CORRIGIDA (em roteiro.js)
 // EM: roteiro.js - SUBSTITUA A FUNÇÃO carregarListaMedicamentos INTEIRA
 // EM: roteiro.js - SUBSTITUA A FUNÇÃO carregarListaMedicamentos INTEIRA
-// EM: roteiro.js - SUBSTITUA A FUNÇÃO carregarListaMedicamentos INTEIRA
 function carregarListaMedicamentos(tipo) {
     const elListaHome = document.getElementById('listaMedicamentosHome');
     const elListaCompleta = document.getElementById('listaCompletaMedicamentos');
@@ -838,7 +837,6 @@ function carregarListaMedicamentos(tipo) {
     let proximoHorarioGlobal = Infinity;
     let detalhesProximoGlobal = 'Nenhum medicamento agendado.';
 
-    // CORREÇÃO:
     const medicamentosOrdenados = medicamentosAtivos.map(med => {
         const proximoHorario = obterProximoHorario(med); 
         return { med, proximoHorario };
@@ -848,20 +846,20 @@ function carregarListaMedicamentos(tipo) {
     medicamentosOrdenados.forEach(item => {
         const med = item.med;
         const proximo = item.proximoHorario;
-
-        // --- CORREÇÃO: A string 24h é a hora original salva (o que está correto) ---
         let hora24h = proximo.horaString; 
         
-        // CORREÇÃO: A Home deve ignorar a dose de 1ms para o banner "Próximo Medicamento"
         if (proximo.timestamp > 1 && proximo.timestamp < proximoHorarioGlobal) {
             proximoHorarioGlobal = proximo.timestamp;
             detalhesProximoGlobal = `${med.apelido} (${med.dose}) às ${hora24h}`; 
         }
 
-        // --- INÍCIO DA LÓGICA DE ATRASO CORRIGIDA ---
+        // --- LÓGICA DE ATRASO CORRIGIDA (AGORA SALVA O HORÁRIO) ---
         let estaAtrasado = false;
+        let horarioAtrasado = null; // <<< CORREÇÃO AQUI: Nova variável
         if (med.historico && med.historico.length > 0) {
-            estaAtrasado = med.historico.some(reg => {
+            
+            // <<< CORREÇÃO AQUI: Usamos .find() para pegar o registro exato
+            const registroAtrasado = med.historico.find(reg => {
                 if (reg.notificado === true && reg.tomado === null) {
                     const timestampProgramado = getTimestampProgramado(reg.data, reg.horario);
                     const diffMin = (agora.getTime() - timestampProgramado) / 60000;
@@ -869,17 +867,29 @@ function carregarListaMedicamentos(tipo) {
                 }
                 return false;
             });
+
+            // <<< CORREÇÃO AQUI: Se achamos, salvamos os dados
+            if (registroAtrasado) {
+                estaAtrasado = true;
+                horarioAtrasado = registroAtrasado.horario;
+            }
         }
-        // --- FIM DA LÓGICA DE ATRASO CORRIGIDA ---
+        // --- FIM DA LÓGICA DE ATRASO ---
 
         // ====================================================================
         // --- LÓGICA DE CONTADOR DE ADIANTAMENTO (15 MIN) ---
         // ====================================================================
         
-        let statusProximaDose = hora24h; // Valor padrão: a hora agendada
+        let statusProximaDose = hora24h;
         let btnTomarHTML = `<button class="btn-acao btn-tomar" data-id="${med.id}" aria-label="Tomar remédio ${med.apelido}">✓</button>`;
 
-        if (tipo === 'home' && proximo) {
+        // <<< CORREÇÃO AQUI: Bloco IF principal que prioriza o ATRASO
+        if (estaAtrasado) {
+            statusProximaDose = `${horarioAtrasado} (ATRASADO)`; // Mostra o horário atrasado
+            btnTomarHTML = `<button class="btn-acao btn-tomar" data-id="${med.id}" aria-label="Tomar ${med.apelido} atrasado">✓</button>`; // FORÇA o botão a ficar ativo
+        } 
+        // Só checa o tempo futuro SE NÃO ESTIVER ATRASADO
+        else if (tipo === 'home' && proximo) {
             const agoraTimestamp = new Date().getTime();
             const minutosParaProximaDose = Math.floor((proximo.timestamp - agoraTimestamp) / 60000);
             const TOLERANCIA_MINUTOS = 15; 
@@ -1123,31 +1133,45 @@ function registrarMedicamentoTomado(id) {
 
     // --- 2. VERIFICAÇÃO DE TEMPO E ESTADO (PARA CARTÃO MANUAL) ---
     const proximo = obterProximoHorario(med); 
-    const horarioRecente = obterHorarioMaisRecente(med); // <-- CORREÇÃO: PASSA 'med'
+    const horarioRecente = obterHorarioMaisRecente(med); // Pega o horário mais próximo (passado ou futuro imediato)
 
-    if (!horarioRecente) return;
+    if (!horarioRecente) {
+        falarFeedbackCritico("Não foi possível identificar o horário do remédio.");
+        return;
+    }
     
     const agoraTimestamp = new Date().getTime();
     const minutosParaProximaDose = (proximo.timestamp - agoraTimestamp) / 60000;
-    const minutosDeAtraso = horarioRecente.minutosAtras;
-    const TOLERANCIA_MINUTOS_ADIANTADO = 15;
+    const minutosDeAtraso = horarioRecente.minutosAtras; // Ex: 13 (se agora é 20:04 e o remédio era 19:51)
     
-    let acaoNecessaria = 'uma-vez'; 
-    let mensagemBloqueio = null; 
+    const TOLERANCIA_ADIANTADO = 15; // 15 min
+    const TOLERANCIA_ATRASO = 60; // 60 min (o mesmo de obterHorarioMaisRecente)
+    
+    let acaoNecessaria = 'bloquear'; // Começa bloqueado por padrão
+    let mensagemBloqueio = `A dose ainda não está liberada para uso (${proximo.horaString}). Não é possível registrar agora.`; // Mensagem padrão
 
-    // A. Lógica de BLOQUEIO (Muito longe no futuro)
-    if (minutosParaProximaDose > TOLERANCIA_MINUTOS_ADIANTADO) {
-        acaoNecessaria = 'bloquear';
-        mensagemBloqueio = `A dose ainda não está liberada para uso (${proximo.horaString}). Não é possível registrar agora.`;
-    }
-    // B. Lógica de 3 CLIQUES (Adiantamento)
-    else if (minutosParaProximaDose > 0 && minutosParaProximaDose <= TOLERANCIA_MINUTOS_ADIANTADO) {
-        acaoNecessaria = 'tres-vezes';
-    } 
-    // C. Lógica de 1 CLIQUE (Atrasado ou Na Hora)
-    else {
+    // <<< INÍCIO DA LÓGICA CORRIGIDA >>>
+    
+    // CASO 1: Está ATRASADO.
+    // (O horário recente é o que passou E a diferença está dentro da nossa tolerância de 1h)
+    if (horarioRecente.timestamp < agoraTimestamp && minutosDeAtraso <= TOLERANCIA_ATRASO) {
         acaoNecessaria = 'uma-vez';
+    } 
+    // CASO 2: Está ADIANTADO.
+    // (O próximo horário é o que está vindo E está dentro da tolerância de 15 min)
+    else if (proximo.timestamp > agoraTimestamp && minutosParaProximaDose <= TOLERANCIA_ADIANTADO) {
+        acaoNecessaria = 'tres-vezes';
     }
+    // CASO 3: Está NA HORA.
+    // (O horário recente está até 5 minutos no "futuro" imediato, consideramos "na hora")
+    else if (minutosDeAtraso <= 0 && minutosDeAtraso > -5) { 
+         acaoNecessaria = 'uma-vez';
+    }
+    // CASO 4: Está BLOQUEADO (Default)
+    // (Nenhuma das condições acima foi atendida, então está longe demais)
+
+    // <<< FIM DA LÓGICA CORRIGIDA >>>
+
 
     // --- 4. EXECUÇÃO DA AÇÃO (Comando Final) ---
 
@@ -1177,8 +1201,7 @@ function registrarMedicamentoTomado(id) {
 
         registrarDoseEFeedback(id, false);
         
-        // Feedback específico para ATRASO (seu pedido)
-        return;
+        return; // IMPORTANTE: Impede que o código caia nos 3 cliques
     } 
 
     // C. 3 CLIQUES (Adiantamento)
