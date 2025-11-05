@@ -414,6 +414,11 @@ function configurarPaginaConfiguracoes() {
     if (inputNomeConfig) {
         inputNomeConfig.value = nomeUsuario;
     }
+
+    const btnExportar = document.getElementById('btnExportarDados');
+    if (btnExportar) {
+        btnExportar.addEventListener('click', exportarDados);
+    }
 }
 
 // --- LÓGICA DO ASSISTENTE (WIZARD) ---
@@ -2198,7 +2203,10 @@ function configurarPaginaLogin() {
     const inputSenhaDemo = document.getElementById('inputSenhaDemo');
     const btnConfirmarSenha = document.getElementById('btnConfirmarSenhaDemo');
     const btnCancelarSenha = document.getElementById('btnCancelarSenhaDemo');
-
+    const linkImportar = document.getElementById('linkImportarDados');
+    const inputImportar = document.getElementById('inputImportarDados');
+    
+   
     // Voz explicando as opções ao carregar
     setTimeout(() => {
         falarFeedbackCritico("Para usar o aplicativo como visitante, toque no ícone de boneco, para entrar sem conta. Para ver a demonstração da conta de cuidador, toque no ícone de cadeado, para entrar com senha");
@@ -2225,6 +2233,18 @@ if (btnSemConta) {
         }
     });
 }
+ if (linkImportar && inputImportar) {
+        // 1. Quando o usuário clicar no LINK "Importar..."
+        linkImportar.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede o link de navegar
+            // 2. Clica no INPUT escondido
+            inputImportar.click(); 
+        });
+        
+        // 3. Quando o usuário ESCOLHER um arquivo no input
+        inputImportar.addEventListener('change', importarDados);
+    }
+
 
     if (btnComContaDemo) {
         btnComContaDemo.addEventListener('click', () => {
@@ -3003,4 +3023,89 @@ function injetarModalTutorial() {
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
+function importarDados(evento) {
+    const arquivo = evento.target.files[0];
+    if (!arquivo) {
+        return; // Usuário cancelou
+    }
+
+    const leitor = new FileReader();
+
+    // 3. Quando o arquivo terminar de ser lido
+    leitor.onload = (e) => {
+        try {
+            // 4. Analisa o texto do arquivo como JSON
+            const jsonString = e.target.result;
+            const backupData = JSON.parse(jsonString);
+
+            let chavesImportadas = 0;
+            
+            // 5. Itera sobre CADA chave (key) dentro do objeto do backup
+            for (const key in backupData) {
+                // 6. Verifica se a chave pertence ao nosso app (segurança)
+                if (key.startsWith('medHelper')) {
+                    const valor = backupData[key];
+                    localStorage.setItem(key, valor); // Restaura o dado!
+                    chavesImportadas++;
+                }
+            }
+
+            if (chavesImportadas > 0) {
+                falarFeedbackCritico("Dados importados com sucesso! Reiniciando o aplicativo.");
+                alert("Dados importados com sucesso! O aplicativo será reiniciado.");
+                // 7. Redireciona para a home para que o app recarregue com os novos dados
+                window.location.href = 'home.html';
+            } else {
+                alert("Este arquivo não parece ser um backup válido do MeuRemédio.");
+            }
+
+        } catch (erro) {
+            console.error("Erro ao importar dados:", erro);
+            alert("Erro! O arquivo está corrompido ou não é um arquivo de backup válido.");
+        }
+    };
+
+    // 1. Inicia a leitura do arquivo
+    leitor.readAsText(arquivo);
+}
+
+
+function exportarDados() {
+    const backupData = {};
+    let dadosEncontrados = 0;
+
+    // 1. Itera sobre todas as chaves do localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        
+        // 2. Salva apenas as chaves que pertencem ao nosso app
+        if (key.startsWith('medHelper')) {
+            backupData[key] = localStorage.getItem(key);
+            dadosEncontrados++;
+        }
+    }
+
+    if (dadosEncontrados === 0) {
+        alert("Nenhum dado do aplicativo encontrado para salvar.");
+        return;
+    }
+
+    // 3. Cria o arquivo JSON
+    const jsonString = JSON.stringify(backupData, null, 2); // O 'null, 2' formata o JSON bonitinho
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    // 4. Cria um link temporário para forçar o download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `MeuRemedio_Backup_${new Date().toISOString().split('T')[0]}.json`; // Ex: MeuRemedio_Backup_2025-10-31.json
+    document.body.appendChild(a);
+    a.click(); // Clica no link
+
+    // 5. Limpa a sujeira
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    falarFeedbackCritico("Backup salvo. Guarde este arquivo em um local seguro.");
+}
 
