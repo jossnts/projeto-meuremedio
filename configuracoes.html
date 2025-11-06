@@ -39,9 +39,11 @@
             </div>
             <div class="grupo-formulario">
                 <label for="btnExportarDados">Transferir seus Remédios</label>
+                
                 <p class="etapa-texto" style="font-size: 0.9rem; margin-top: -10px; margin-bottom: 10px;">
                     Gere um arquivo para levar seus remédios e configurações para outro aparelho (PC ou celular).
                 </p>
+                <a href="#" id="linkAbrirTutorial" style="text-align: center; display: block; margin-top: 10px; font-weight: 600;">Como transferir meus dados? (Ver tutorial)</a>
                 <button class="btn-secundario" id="btnExportarDados">Salvar meus dados (Exportar)</button>
             </div>
             <div class="grupo-formulario">
@@ -50,6 +52,32 @@
             </div>
         </div>
     </div>
+
+    <div class="modal-overlay" id="tutorialOverlay" style="display: none;"></div>
+
+<div class="modal-notificacao" id="tutorialModal" style="display: none; background-color: var(--cor-fundo-card); max-width: 400px; color: var(--cor-texto-principal);">
+    
+    <button class="btn-fechar-modal" id="btnFecharTutorial" style="background-color: rgba(0,0,0,0.1); color: var(--cor-texto-principal);">✖️</button>
+    
+    <h2 style="text-align: center; margin-bottom: 20px;">Como Transferir Seus Dados</h2>
+
+    <div id="tutorialEscolha">
+        <p style="text-align: center; margin-bottom: 20px;">Para qual celular você quer levar seus dados?</p>
+        <div class="botoes-modal-container">
+            <button class="btn-modal btn-tomar" id="btnVerTutorialAndroid" style="background-color: var(--cor-primaria-escura);">Ver Tutorial (Android)</button>
+            <button class="btn-modal btn-tomar" id="btnVerTutorialIOS" style="background-color: var(--cor-primaria-escura);">Ver Tutorial (iOS)</button>
+        </div>
+    </div>
+
+    <div id="tutorialVideoContainer" style="display: none; text-align: center;">
+        
+        <video id="videoAndroid" width="100%" controls style="display: none; border-radius: 8px;" src="[URL_DO_SEU_VIDEO_ANDROID.mp4]"></video>
+        <video id="videoIOS" width="100%" controls style="display: none; border-radius: 8px;" src="[URL_DO_SEU_VIDEO_IOS.mp4]"></video>
+        
+        <button class="btn-modal btn-soneca" id="btnVoltarTutorial" style="margin-top: 15px;">Voltar</button>
+    </div>
+
+</div>
 
     <script src="roteiro.js"></script>
 </body>

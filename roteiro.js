@@ -419,6 +419,82 @@ function configurarPaginaConfiguracoes() {
     if (btnExportar) {
         btnExportar.addEventListener('click', exportarDados);
     }
+
+    const linkAbrir = document.getElementById('linkAbrirTutorial');
+    const btnFechar = document.getElementById('btnFecharTutorial');
+    const overlay = document.getElementById('tutorialOverlay');
+    const modal = document.getElementById('tutorialModal');
+    
+    const telaEscolha = document.getElementById('tutorialEscolha');
+    const telaVideo = document.getElementById('tutorialVideoContainer');
+    
+    const btnAndroid = document.getElementById('btnVerTutorialAndroid');
+    const btnIOS = document.getElementById('btnVerTutorialIOS');
+    const btnVoltar = document.getElementById('btnVoltarTutorial');
+    
+    const videoAndroid = document.getElementById('videoAndroid');
+    const videoIOS = document.getElementById('videoIOS');
+
+    // Função para parar todos os vídeos (para não tocar no fundo)
+    function pararVideos() {
+        videoAndroid.pause();
+        videoAndroid.currentTime = 0;
+        videoIOS.pause();
+        videoIOS.currentTime = 0;
+    }
+
+    // 1. Abrir o Modal
+    if (linkAbrir) {
+        linkAbrir.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede o link de pular a página
+            overlay.style.display = 'block';
+            modal.style.display = 'block';
+            
+            // Reseta para a tela de escolha
+            telaEscolha.style.display = 'block';
+            telaVideo.style.display = 'none';
+            videoAndroid.style.display = 'none';
+            videoIOS.style.display = 'none';
+        });
+    }
+
+    // 2. Fechar o Modal
+    if (btnFechar) {
+        btnFechar.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            modal.style.display = 'none';
+            pararVideos();
+        });
+    }
+
+    // 3. Escolher Android
+    if (btnAndroid) {
+        btnAndroid.addEventListener('click', () => {
+            telaEscolha.style.display = 'none';
+            telaVideo.style.display = 'block';
+            videoAndroid.style.display = 'block'; // Mostra o vídeo do Android
+            videoAndroid.play();
+        });
+    }
+
+    // 4. Escolher iOS
+    if (btnIOS) {
+        btnIOS.addEventListener('click', () => {
+            telaEscolha.style.display = 'none';
+            telaVideo.style.display = 'block';
+            videoIOS.style.display = 'block'; // Mostra o vídeo do iOS
+            videoIOS.play();
+        });
+    }
+    
+    // 5. Voltar (do vídeo para a escolha)
+    if (btnVoltar) {
+        btnVoltar.addEventListener('click', () => {
+            telaEscolha.style.display = 'block';
+            telaVideo.style.display = 'none';
+            pararVideos();
+        });
+    }
 }
 
 // --- LÓGICA DO ASSISTENTE (WIZARD) ---
