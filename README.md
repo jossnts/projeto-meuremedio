@@ -9,6 +9,8 @@ Você registra todas as informações do seu remédio dentro do sistema, incluin
 Existe opções de passar para outro telefone, e existe opções de vocẽ tomar o remédio antes do horário, mas o sistema não deixa se for tempo maior que 15 minutos
 Vocẽ pode gerar relátorios desde o inicío que começou a usar o sistema
 
+Existe uma seção de Acessibilidades e também uma voz que guia o usuário em tudo, pode ser desativada depois, tudo feito para as pessoas com deficiencia(PCD) que utilizam o sistema.
+
 Se você atrasar ou não tomar o remédio, será registrado no relatório
 
 
